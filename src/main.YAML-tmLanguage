@@ -1,0 +1,14 @@
+---
+fileTypes:
+    - gp
+    - pari
+    - parigp
+name: parigp-lang
+patterns:
+    - include: "#comments"
+repository:
+    code:
+        patterns:
+            - include: "#comments"
+scopeName: source.parigp
+$schema: "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json"

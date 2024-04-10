@@ -1,30 +1,29 @@
+---
 repository:
     comments:
         patterns:
-            -
-                include: '#inline'
+            - include: "#inline"
             -
                 begin: '/\*'
                 beginCaptures:
-                    '0':
+                    0:
                         name: punctuation.definition.comment.begin.parigp
                 end: '\*/'
                 endCaptures:
-                    '0':
+                    0:
                         name: punctuation.definition.comment.end.parigp
                 name: comment.block.parigp
                 patterns:
-                    -
-                        include: '#nested'
+                    - include: "#nested"
         repository:
             inline:
                 patterns:
                     -
-                        match: '(\\).*$\n?'
+                        match: '(\\\\).*$\n?'
                         captures:
-                            '0':
+                            0:
                                 name: punctuation.definition.comment.parigp
-                            '1':
+                            1:
                                 name: comment.line.double-slash.parigp
             nested:
                 patterns:
@@ -32,5 +31,4 @@ repository:
                         begin: '/\*'
                         end: '\*/'
                         patterns:
-                            -
-                                include: '#nested'
+                            - include: "#nested"
