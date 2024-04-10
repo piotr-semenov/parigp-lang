@@ -6,8 +6,8 @@
 
   /**
 ##^^ source.parigp comment.block.parigp punctuation.definition.comment.begin.parigp
-    Multi-line comment: Line 1  
-##  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp comment.block.parigp
+    Multi-line comment: Line 1
+##  ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp comment.block.parigp
     Multi-line comment: Line 2
 ##  ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp comment.block.parigp
     /* Nested multi-line comments shouldn't confuse the parser */

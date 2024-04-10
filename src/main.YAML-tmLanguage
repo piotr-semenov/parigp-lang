@@ -11,4 +11,5 @@ repository:
         patterns:
             - include: "#comments"
 scopeName: source.parigp
-$schema: "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json"
+$schema: >-
+  https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json

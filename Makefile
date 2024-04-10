@@ -2,16 +2,25 @@
 ## Creates the Textmate grammar for PARI/GP.
 ## -----------------------------------------
 
-SHELL:=/bin/bash
+SHELL := /bin/bash
+.DEFAULT_GOAL := all
 
 
+.PHONY: help
 help:	## Show the help.
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
 
+.PHONY: all
+all:	## Call clean, build, and test recipes.
+all: clean build test;
+
+
+.PHONY: build
 build:	## Build Textmate grammar for PARI/GP.
 build: parigp.JSON-tmLanguage
 	@cp $< ./syntaxes/parigp.tmLanguage.json
 
+.PHONY: clean
 clean:	## Clean the build targets.
 clean:
 	@rm -f ./syntaxes/* parigp.*tmLanguage
@@ -30,6 +39,7 @@ parigp.tmLanguage: parigp.YAML-tmLanguage
 	 --output-format xml \
 	 $< > $@
 
+.PHONY: test
 test:	## Test the Textmate grammar for PARI/GP.
 test: syntaxes/parigp.tmLanguage.json
 	@vscode-tmgrammar-test ./tests/*.gp --grammar ./syntaxes/parigp.tmLanguage.json
