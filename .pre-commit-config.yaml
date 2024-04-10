@@ -1,0 +1,49 @@
+---
+repos:
+  # print all arguments passed to pre-commit
+  - repo: meta
+    hooks:
+      - id: identity
+  # general
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-case-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  # git
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.19.1
+    hooks:
+      - id: gitlint
+  # json
+  - repo: https://gitlab.com/bmares/check-json5
+    rev: v1.0.0
+    hooks:
+      - id: check-json5
+        files: '.*\.(json|JSON-tmLanguage)'
+  - repo: local
+    hooks:
+      - id: jsonlint
+        name: jsonlint
+        entry: jsonlint --nonstrict
+        language: system
+        files: '.*\.(json|JSON-tmLanguage)'
+  # yaml
+  - repo: local
+    hooks:
+      - id: yamllint
+        name: yamllint
+        entry: yamllint
+        language: system
+        files: '.*\.(yaml|YAML-tmLanguage)'
+  # markdown
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.39.0
+    hooks:
+      - id: markdownlint
+  # Makefile
+  - repo: https://github.com/mrtazz/checkmake
+    rev: 0.2.2
+    hooks:
+      - id: checkmake
