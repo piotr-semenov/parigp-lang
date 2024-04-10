@@ -14,12 +14,12 @@ build: parigp.JSON-tmLanguage
 
 clean:	## Clean the build targets.
 clean:
-	@rm -rf ./syntaxes/ parigp.*tmLanguage
+	@rm -f ./syntaxes/* parigp.*tmLanguage
 
 parigp.YAML-tmLanguage: ./src
 	@yq ea '. as $$item ireduce ({}; . * $$item )' ./src/*.YAML-tmLanguage > $@
 
-parigp.JSON-tmLanguage: parigp.YAML-tmLanguage
+syntaxes/parigp.tmLanguage.json parigp.JSON-tmLanguage: parigp.YAML-tmLanguage
 	@yq -o=json eval $< > $@
 
 parigp.tmLanguage: parigp.YAML-tmLanguage
