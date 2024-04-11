@@ -25,7 +25,7 @@ repos:
   - repo: local
     hooks:
       - id: jsonlint
-        name: jsonlint
+        name: lints json
         entry: jsonlint --nonstrict
         language: system
         files: '.*\.(json|JSON-tmLanguage)'
@@ -33,7 +33,7 @@ repos:
   - repo: local
     hooks:
       - id: yamllint
-        name: yamllint
+        name: lints yaml
         entry: yamllint
         language: system
         files: '.*\.(yaml|YAML-tmLanguage)'
@@ -41,7 +41,7 @@ repos:
   - repo: local
     hooks:
       - id: xmllint
-        name: xmllint
+        name: lints xml
         entry: xmllint --valid --noout
         language: system
         files: '.*\.tmLanguage$'
@@ -55,3 +55,11 @@ repos:
     rev: 0.2.2
     hooks:
       - id: checkmake
+  # Vagrantfile
+  - repo: local
+    hooks:
+      - id: vagrant-validate
+        name: validates Vagrantfile
+        entry: vagrant validate
+        language: system
+        files: 'Vagrantfile'
