@@ -37,13 +37,13 @@ $(BUILD_DIR)parigp.YAML-tmLanguage: | $(BUILD_DIR)
 $(addprefix $(BUILD_DIR)parigp., tmLanguage.json JSON-tmLanguage): $(BUILD_DIR)parigp.YAML-tmLanguage
 	@yq -o=json eval $< > $@
 
-$(BUILD_DIR)parigp.tmLanguage: $(BUILD_DIR)parigp.YAML-tmLanguage
-	@yq \
-	 --xml-attribute-prefix @ \
-	 --xml-content-name '#text' \
-	 --input-format yaml \
-	 --output-format xml \
-	 $< > $@
+$(BUILD_DIR)parigp.tmLanguage: $(BUILD_DIR)parigp.JSON-tmLanguage
+	@python -u -c "import json, plistlib as plist;\
+	               plist.dump(json.load(fin:=open('$<', 'rt')),\
+	                          fout:=open('$@', 'wb'),\
+	                          fmt=plist.FMT_XML);\
+	               fin.close();\
+	               fout.close()"
 
 .PHONY: test
 test:	## Test the Textmate grammar for PARI/GP.
