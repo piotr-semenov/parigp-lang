@@ -12,9 +12,12 @@ Vagrant.configure("2") do |config|
     vb.memory = "4096"
   end
 
-  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+  config.vm.synced_folder ".", "/vagrant"
+
+  config.vm.provision "shell", privileged: false, inline: <<-'SHELL'
     cd /vagrant/
-    echo "nix flake check --impure &&\
+    echo "statix check &&\
+      nix flake check --impure &&\
       cp -r \$(nix build --impure --no-link --print-out-paths) ./syntaxes/" |\
       nix-shell --run bash
   SHELL
