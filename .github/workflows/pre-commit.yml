@@ -8,16 +8,29 @@ on:
 
 jobs:
   pre-commit:
-    runs-on: ubuntu-latest
+    runs-on: macos-12
     steps:
-      - name: checkout
+      - name: Install pre-commit and yamllint
+        run: brew install pre-commit yamllint
+
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - id: file_changes
+      - id: file-changes
         uses: trilom/file-changes-action@v1.2.4
         with:
           output: ' '
 
-      - uses: pre-commit/action@v3.0.1
-        with:
-          extra_args: --files ${{ steps.file_changes.outputs.files }} --show-diff-on-failure
+      - name: Run pre-commit
+        run: |
+          pre-commit run --show-diff-on-failure\
+                         --color=always\
+                         --files ${{ steps.file-changes.outputs.files }}
+        shell: bash
+
+      - name: Show pre-commit logs
+        if: failure()
+        run: cat ~/.cache/pre-commit/pre-commit.log
+
+      - name: Show pre-commit version
+        run: pre-commit --version
