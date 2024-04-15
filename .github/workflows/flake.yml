@@ -26,7 +26,7 @@ jobs:
         run: vagrant --version
 
       - name: Run vagrant up & provision
-        run: vagrant up --provision
+        run: VER=23.11 vagrant up --provision
 
       - name: Auto-commit changes
         uses: stefanzweifel/git-auto-commit-action@v5.0.1
