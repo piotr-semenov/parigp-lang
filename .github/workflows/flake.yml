@@ -1,0 +1,42 @@
+---
+name: "Build"
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore: [ "*.md" ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache Vagrant boxes
+        uses: actions/cache@v4.0.2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: $${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+
+      - name: Show Vagrant version
+        run: vagrant --version
+
+      - name: Run vagrant up & provision
+        run: vagrant up --provision
+
+      - name: Auto-commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5.0.1
+        with:
+          commit_message: Automated Change
+          branch: main
+          commit_options: '--no-verify --signoff'
+          commit_user_name: Publishing Bot
+          commit_user_email: publishing-bot@users.noreply.github.com
+
+      - name: Run if changes have been detected
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        run: echo "New TextMate grammar was published"
