@@ -1,0 +1,44 @@
+---
+repository:
+  comments:
+    patterns:
+      - include: "#inline"
+      - begin: '/\*'
+        beginCaptures:
+          0:
+            name: punctuation.definition.comment.begin.parigp
+        end: '\*/'
+        endCaptures:
+          0:
+            name: punctuation.definition.comment.end.parigp
+        name: comment.block.parigp
+        patterns:
+          - include: "#nested"
+    repository:
+      inline:
+        patterns:
+          - match: '(\\\\).*$\n?'
+            captures:
+              0:
+                name: punctuation.definition.comment.parigp
+              1:
+                name: comment.line.double-slash.parigp
+      nested:
+        patterns:
+          - begin: '/\*'
+            end: '\*/'
+            patterns:
+              - include: "#nested"
+  code:
+    patterns:
+      - include: "#comments"
+fileTypes:
+  - gp
+  - pari
+  - parigp
+name: parigp-lang
+patterns:
+  - include: "#comments"
+scopeName: source.parigp
+$schema: >-
+  https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
