@@ -35,10 +35,12 @@
             stdenv.mkDerivation {
               name = "parigp.tmGrammar";
               buildInputs = [
+                jq
                 yq-go
                 gnumake
                 gnused
                 python39
+                jinja2-cli
 
                 newer_pkgs.pari
 

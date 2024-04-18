@@ -3,7 +3,25 @@ repository:
     builtin-functions:
         patterns:
             -
-                match: '\b({{ functions|join("|") }})\b\s*(?={|\()'
+                # yamllint disable-line rule:line-length
+                match: '\b({{ scopes["entity.name.function"] | join("|") }})\b\s*(?={|\()'
                 captures:
                     1:
                         name: entity.name.function
+            -
+                # yamllint disable-line rule:line-length
+                match: '\b({{ scopes["constant.language"] | join("|") }})\b\s*(\(\)|\{\}|\(\{\}\)|\{\(\)\})?'
+                captures:
+                    1:
+                        name: constant.language
+            -
+                match: '\b({{ scopes["keyword.control"] | join("|") }})\b'
+                captures:
+                    1:
+                        name: keyword.control
+            -
+                # yamllint disable-line rule:line-length
+                match: '\.({{ scopes["entity.name.function.member"] | join("|") }})\b'
+                captures:
+                    1:
+                        name: entity.name.function.member
