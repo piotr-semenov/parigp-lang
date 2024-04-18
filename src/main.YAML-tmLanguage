@@ -6,10 +6,12 @@ fileTypes:
 name: parigp-lang
 patterns:
     - include: "#comments"
+    - include: "#code"
 repository:
     code:
         patterns:
             - include: "#comments"
+            - include: "#builtin-functions"
 scopeName: source.parigp
 $schema: >-
   https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json

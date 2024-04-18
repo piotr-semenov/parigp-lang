@@ -1,0 +1,9 @@
+---
+repository:
+    builtin-functions:
+        patterns:
+            -
+                match: '\b({{ functions|join("|") }})\b\s*(?={|\()'
+                captures:
+                    1:
+                        name: entity.name.function

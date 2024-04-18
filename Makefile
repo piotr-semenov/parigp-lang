@@ -31,7 +31,8 @@ clean:	## Clean the build targets.
 clean:
 	@rm -f $(BUILD_DIR)*
 
-$(BUILD_DIR)parigp.YAML-tmLanguage: | $(BUILD_DIR)
+J2_TEMPLATES := $(wildcard $(ROOT_DIR)src/*.j2)
+$(BUILD_DIR)parigp.YAML-tmLanguage: $(J2_TEMPLATES:.j2=) | $(BUILD_DIR)
 	@yq ea '. as $$item ireduce ({}; . * $$item )' $(ROOT_DIR)src/*.YAML-tmLanguage > $@
 
 $(addprefix $(BUILD_DIR)parigp., tmLanguage.json JSON-tmLanguage): $(BUILD_DIR)parigp.YAML-tmLanguage
@@ -44,6 +45,12 @@ $(BUILD_DIR)parigp.tmLanguage: $(BUILD_DIR)parigp.JSON-tmLanguage
 	                          fmt=plist.FMT_XML);\
 	               fin.close();\
 	               fout.close()"
+
+$(ROOT_DIR)src/functions.YAML-tmLanguage: $(BUILD_DIR)gp_commands.tsv
+	@grep entity.name.function $< |\
+	 cut -f1 |\
+	 jq -Rn '{"functions": [inputs]}' |\
+	 j2 --format=yaml $@.j2 > $@
 
 .PHONY: test
 test:	## Test the Textmate grammar for PARI/GP.
