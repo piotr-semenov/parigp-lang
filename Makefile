@@ -62,16 +62,16 @@ $(BUILD_DIR)gp_commands.tsv:
 	@printf 'Command\tType\n' > $@
 	@echo $(FUNCS) |\
 	 xargs -n1 |\
-	 xargs -I@ $(SHELL) -c "printf '%s\t%s\n' @ \$$(echo 'read(\"$(ROOT_DIR)scripts/utils.gp\"); classify(\"@\")' |\
+	 xargs -I@ $(SHELL) -c "printf '%s\t%s\t%s\n' @ \$$(echo 'read(\"$(ROOT_DIR)scripts/utils.gp\"); classify(\"@\")' |\
 	  gp -fq 2> /dev/null |\
-	  tr -d '\"')" >> $@
+	  tr -d '\"') \"\$$(echo -e ?@ | gp -fq | tr -d '\n')\"" >> $@
 
 $(BUILD_DIR)gp_member_functions.txt:
 	@sed -E 's|([a-z])([0-9]+)-\1([0-9]+)|\1{\2..\3}|p' \
 	 <(echo '?.' | gp -fq | grep : | cut -d':' -f1 | tr ',' '\n') |\
 	 sort |\
 	 uniq |\
-	 xargs -I@ bash -c 'echo -e @"\n"' | xargs -n1 > $@
+	 xargs -I@ $(SHELL) -c 'echo -e @"\n"' | xargs -n1 > $@
 
 $(BUILD_DIR)gp_builtins.json: $(addprefix $(BUILD_DIR)gp_, commands.tsv member_functions.txt)
 	@jq -s '.[0] * .[1]' <(cat $(BUILD_DIR)gp_commands.tsv |\
@@ -82,3 +82,7 @@ $(BUILD_DIR)gp_builtins.json: $(addprefix $(BUILD_DIR)gp_, commands.tsv member_f
 	                     <(cat $(BUILD_DIR)gp_member_functions.txt |\
 	                       jq -R '{"entity.name.function.member": [inputs]}') |\
 	 jq -r '{"scopes": .}' > $@
+
+$(BUILD_DIR)parigp.sublime-tooltip: $(BUILD_DIR)gp_commands.tsv
+	@cat $< |\
+	 jq -R '[inputs | split("\t") | {(.[0]): {name: .[0], descr: .[2]}}] | add' > $@
