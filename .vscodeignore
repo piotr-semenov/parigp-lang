@@ -1,4 +1,7 @@
-.vscode/**
-.vscode-test/**
-.gitignore
-vsc-extension-quickstart.md
+*
+!language-configuration.json
+!package.json
+!README.md
+!LICENSE
+*/**
+!syntaxes/parigp.JSON-tmLanguage
