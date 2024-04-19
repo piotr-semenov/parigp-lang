@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     cd /vagrant/
     echo "statix check &&\
       nix flake check --impure &&\
-      cp \$(nix build --impure --no-link --print-out-paths)/* ./syntaxes/" |\
+      cp \$(nix build --impure --no-link --print-out-paths)/parigp* ./syntaxes/" |\
       nix-shell --run bash
   SHELL
 end

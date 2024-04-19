@@ -3,6 +3,10 @@
   "displayName": "PARI/GP Lang",
   "description": "Syntax highlighting for PARI/GP language",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piotr-semenov/parigp-lang.git"
+  },
   "engines": {
     "vscode": "^1.87.0"
   },
@@ -10,16 +14,30 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "parigp",
-      "aliases": ["PARI/GP", "parigp"],
-      "extensions": [".pari",".parigp",".gp"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "parigp",
-      "scopeName": "source.parigp",
-      "path": "./syntaxes/parigp.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "parigp",
+        "aliases": [
+          "PARI/GP",
+          "parigp"
+        ],
+        "extensions": [
+          ".pari",
+          ".parigp",
+          ".gp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "parigp",
+        "scopeName": "source.parigp",
+        "path": "./syntaxes/parigp.tmLanguage.json"
+      }
+    ]
+  },
+  "dependencies": {
+    "@vscode/vsce": "^2.25.0"
   }
 }

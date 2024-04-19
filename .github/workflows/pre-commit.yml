@@ -7,11 +7,11 @@ on:
     branches: [ main ]
 
 jobs:
-  pre-commit:
+  Pre-commit:
     runs-on: macos-12
     steps:
-      - name: Install pre-commit and yamllint
-        run: brew install pre-commit yamllint
+      - name: Install pre-commit, jsonlint, and yamllint
+        run: brew install pre-commit jsonlint yamllint
 
       - name: Checkout
         uses: actions/checkout@v3
