@@ -109,6 +109,35 @@
         }
       ]
     },
+    "literals": {
+      "patterns": [
+        {
+          "include": "#numeric"
+        }
+      ],
+      "repository": {
+        "numeric": {
+          "patterns": [
+            {
+              "match": "\\b(0(x|X)[0-9A-Fa-f]*)\\b",
+              "name": "constant.numeric.hex"
+            },
+            {
+              "match": "\\b(0(b|B)[0-1]*)\\b",
+              "name": "constant.numeric.bin"
+            },
+            {
+              "match": "\\b([0-9]*\\.[0-9]*\\s*[eE][+-]?[0-9]+)\\b",
+              "name": "constant.numeric.float"
+            },
+            {
+              "match": "\\b([0-9]+)\\b",
+              "name": "constant.numeric.int"
+            }
+          ]
+        }
+      }
+    },
     "code": {
       "patterns": [
         {
@@ -116,6 +145,9 @@
         },
         {
           "include": "#functions"
+        },
+        {
+          "include": "#literals"
         }
       ]
     }

@@ -37,6 +37,10 @@
 					<key>include</key>
 					<string>#functions</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literals</string>
+				</dict>
 			</array>
 		</dict>
 		<key>comments</key>
@@ -202,6 +206,49 @@
 					<string>([[:alpha:]][[:alnum:]_]*)\b\s*=\s*\{?\s*(\([^\(]+\)|[[:alpha:]][[:alnum:]_]*)\s*-\s*&gt;</string>
 				</dict>
 			</array>
+		</dict>
+		<key>literals</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#numeric</string>
+				</dict>
+			</array>
+			<key>repository</key>
+			<dict>
+				<key>numeric</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>\b(0(x|X)[0-9A-Fa-f]*)\b</string>
+							<key>name</key>
+							<string>constant.numeric.hex</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\b(0(b|B)[0-1]*)\b</string>
+							<key>name</key>
+							<string>constant.numeric.bin</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\b([0-9]*\.[0-9]*\s*[eE][+-]?[0-9]+)\b</string>
+							<key>name</key>
+							<string>constant.numeric.float</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\b([0-9]+)\b</string>
+							<key>name</key>
+							<string>constant.numeric.int</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
 		</dict>
 	</dict>
 	<key>scopeName</key>
