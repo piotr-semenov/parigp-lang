@@ -1,13 +1,13 @@
 ---
 repository:
-    builtin-functions:
+    functions:
         patterns:
             -
                 # yamllint disable-line rule:line-length
                 match: '\b({{ scopes["entity.name.function"] | join("|") }})\b\s*(?={|\()'
                 captures:
                     1:
-                        name: entity.name.function
+                        name: entity.name.function.builtins
             -
                 # yamllint disable-line rule:line-length
                 match: '\b({{ scopes["constant.language"] | join("|") }})\b\s*(\(\)|\{\}|\(\{\}\)|\{\(\)\})?'
@@ -24,4 +24,17 @@ repository:
                 match: '\.({{ scopes["entity.name.function.member"] | join("|") }})\b'
                 captures:
                     1:
-                        name: entity.name.function.member
+                        name: entity.name.function.member.builtins
+
+            -
+                match: '([[:alpha:]][[:alnum:]_]*)\b\s*(\(|\(\s*\{|\{\s*\()'
+                captures:
+                    1:
+                        name: entity.name.function.user
+
+            -
+                # yamllint disable-line rule:line-length
+                match: '([[:alpha:]][[:alnum:]_]*)\b\s*=\s*\{?\s*(\([^\(]+\)|[[:alpha:]][[:alnum:]_]*)\s*-\s*>'
+                captures:
+                    1:
+                        name: entity.name.function.user.lambda
