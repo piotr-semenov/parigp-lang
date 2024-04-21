@@ -66,20 +66,21 @@ $(BUILD_DIR)gp_commands.tsv:
 	  gp -fq 2> /dev/null |\
 	  tr -d '\"') \"\$$(echo -e ?@ | gp -fq | tr -d '\n')\"" >> $@
 
-$(BUILD_DIR)gp_member_functions.txt:
+$(BUILD_DIR)gp_member_functions.tsv:
+	@printf 'Member\n' > $@
 	@sed -E 's|([a-z])([0-9]+)-\1([0-9]+)|\1{\2..\3}|p' \
 	 <(echo '?.' | gp -fq | grep : | cut -d':' -f1 | tr ',' '\n') |\
 	 sort |\
 	 uniq |\
-	 xargs -I@ $(SHELL) -c 'echo -e @"\n"' | xargs -n1 > $@
+	 xargs -I@ $(SHELL) -c 'echo -e @"\n"' | xargs -n1 >> $@
 
-$(BUILD_DIR)gp_builtins.json: $(addprefix $(BUILD_DIR)gp_, commands.tsv member_functions.txt)
+$(BUILD_DIR)gp_builtins.json: $(addprefix $(BUILD_DIR)gp_, commands.tsv member_functions.tsv)
 	@jq -s '.[0] * .[1]' <(cat $(BUILD_DIR)gp_commands.tsv |\
 	                       jq -R -f <(echo "[inputs | split(\"\t\") | {name: .[0], type: .[1]}] |\
 	                                        group_by(.type) |\
 	                                        map({ key: (.[0].type), value: [.[] | .name] }) |\
 	                                        from_entries")) \
-	                     <(cat $(BUILD_DIR)gp_member_functions.txt |\
+	                     <(cat $(BUILD_DIR)gp_member_functions.tsv |\
 	                       jq -R '{"entity.name.function.member": [inputs]}') |\
 	 jq -r '{"scopes": .}' > $@
 
