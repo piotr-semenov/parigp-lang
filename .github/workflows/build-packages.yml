@@ -1,5 +1,5 @@
 ---
-name: "Build"
+name: "Build Packages"
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     branches: [ main ]
 
 jobs:
-  Build:
+  Build-VSIX:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3

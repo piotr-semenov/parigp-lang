@@ -1,5 +1,5 @@
 ---
-name: pre-commit
+name: "Pre-commit"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  Pre-commit:
+  Run-Hooks:
     runs-on: macos-12
     steps:
       - name: Install pre-commit, jsonlint, and yamllint
