@@ -12,6 +12,7 @@ repository:
         patterns:
             - include: "#comments"
             - include: "#functions"
+            - include: "#literals"
 scopeName: source.parigp
 $schema: >-
   https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
