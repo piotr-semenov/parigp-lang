@@ -84,7 +84,7 @@
           }
         },
         {
-          "match": "\\.(b3|b4|b5|b6|b7|b8|codiff|c4|c5|c6|eta|f|area|a1|a2|a3|a4|a5|a6|bid|bnf|clgp|cyc|diff|disc|e|fu|gen|group|index|j|mod|nf|no|omega|orders|p|pol|polabs|r1|r2|reg|roots|sign|t2|tate|tu|zk|zkst)\\b",
+          "match": "\\.(b2|b3|b4|b5|b6|b7|b8|codiff|c4|c5|c6|eta|f|area|a1|a2|a3|a4|a5|a6|bid|bnf|clgp|cyc|diff|disc|e|fu|gen|group|index|j|mod|nf|no|omega|orders|p|pol|polabs|r1|r2|reg|roots|sign|t2|tate|tu|zk|zkst)\\b",
           "captures": {
             "1": {
               "name": "entity.name.function.member"
