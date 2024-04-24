@@ -41,6 +41,10 @@
 					<key>include</key>
 					<string>#literals</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#operators</string>
+				</dict>
 			</array>
 		</dict>
 		<key>comments</key>
@@ -238,6 +242,10 @@
 					<key>include</key>
 					<string>#numeric</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string</string>
+				</dict>
 			</array>
 			<key>repository</key>
 			<dict>
@@ -271,7 +279,97 @@
 						</dict>
 					</array>
 				</dict>
+				<key>string</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>"(.*)"</string>
+							<key>name</key>
+							<string>constant.character.escape</string>
+						</dict>
+					</array>
+				</dict>
 			</dict>
+		</dict>
+		<key>operators</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.factorial</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>\b(!)</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(&amp;&amp;|\|\||!\b)</string>
+					<key>name</key>
+					<string>keyword.operator.logical</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(&lt;=|&gt;=|&lt;|&gt;)</string>
+					<key>name</key>
+					<string>keyword.operator.comparison</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>[^&lt;&gt;](=)</string>
+					<key>name</key>
+					<string>keyword.operator.assignment</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(&lt;&lt;|&gt;&gt;)</string>
+					<key>name</key>
+					<string>keyword.operator.shift</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\-\-|\+\+)</string>
+					<key>name</key>
+					<string>keyword.operator.increment-decrement</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\-|\+|\*|\/|\\|\\/|%)</string>
+					<key>name</key>
+					<string>keyword.operator.arithmetic</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\+=|\-=|\*=|\/=|\\=|&lt;&lt;=|&gt;&gt;=)</string>
+					<key>name</key>
+					<string>keyword.operator.arithmetic.assign</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\.\.)</string>
+					<key>name</key>
+					<string>keyword.operator.range</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\~)</string>
+					<key>name</key>
+					<string>keyword.operator.transpose</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>[\b\)](\')</string>
+					<key>name</key>
+					<string>keyword.operator.derivative</string>
+				</dict>
+			</array>
 		</dict>
 	</dict>
 	<key>scopeName</key>

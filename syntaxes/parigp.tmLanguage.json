@@ -129,6 +129,9 @@
       "patterns": [
         {
           "include": "#numeric"
+        },
+        {
+          "include": "#string"
         }
       ],
       "repository": {
@@ -151,6 +154,14 @@
               "name": "constant.numeric.int"
             }
           ]
+        },
+        "string": {
+          "patterns": [
+            {
+              "match": "\"(.*)\"",
+              "name": "constant.character.escape"
+            }
+          ]
         }
       }
     },
@@ -164,6 +175,61 @@
         },
         {
           "include": "#literals"
+        },
+        {
+          "include": "#operators"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "\\b(!)",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.factorial"
+            }
+          }
+        },
+        {
+          "match": "(&&|\\|\\||!\\b)",
+          "name": "keyword.operator.logical"
+        },
+        {
+          "match": "(<=|>=|<|>)",
+          "name": "keyword.operator.comparison"
+        },
+        {
+          "match": "[^<>](=)",
+          "name": "keyword.operator.assignment"
+        },
+        {
+          "match": "(<<|>>)",
+          "name": "keyword.operator.shift"
+        },
+        {
+          "match": "(\\-\\-|\\+\\+)",
+          "name": "keyword.operator.increment-decrement"
+        },
+        {
+          "match": "(\\-|\\+|\\*|\\/|\\\\|\\\\/|%)",
+          "name": "keyword.operator.arithmetic"
+        },
+        {
+          "match": "(\\+=|\\-=|\\*=|\\/=|\\\\=|<<=|>>=)",
+          "name": "keyword.operator.arithmetic.assign"
+        },
+        {
+          "match": "(\\.\\.)",
+          "name": "keyword.operator.range"
+        },
+        {
+          "match": "(\\~)",
+          "name": "keyword.operator.transpose"
+        },
+        {
+          "match": "[\\b\\)](\\')",
+          "name": "keyword.operator.derivative"
         }
       ]
     }
