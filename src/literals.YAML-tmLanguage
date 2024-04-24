@@ -3,6 +3,7 @@ repository:
     literals:
         patterns:
             - include: "#numeric"
+            - include: "#string"
 
         repository:
             numeric:
@@ -19,3 +20,9 @@ repository:
                     -
                         match: '\b([0-9]+)\b'
                         name: constant.numeric.int
+
+            string:
+                patterns:
+                    -
+                        match: '"(.*)"'
+                        name: constant.character.escape

@@ -15,3 +15,9 @@
 
   0b00011001
 ##^^^^^^^^^^ source.parigp constant.numeric.bin
+
+  "Hello, world!"
+## ^^^^^^^^^^^^^ source.parigp constant.character.escape
+
+  s = "Lorem_ipsum;"
+##    ^^^^^^^^^^^^^ source.parigp constant.character.escape
