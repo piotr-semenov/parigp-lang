@@ -32,5 +32,6 @@
   [1, 2, 3; 4, 5, 6]~
 ##                  ^ source.parigp keyword.operator.transpose
 
-  ('x^2 + 1)'
-##          ^ source.parigp keyword.operator.derivative
+  [('x^2 + 1)', 1; 1, 'x]'
+##           ^ source.parigp keyword.operator.derivative
+##                       ^ source.parigp keyword.operator.derivative

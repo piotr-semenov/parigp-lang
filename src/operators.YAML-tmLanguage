@@ -35,5 +35,5 @@ repository:
                 match: '(\~)'
                 name: keyword.operator.transpose
             -
-                match: "[\\b\\)](\\')"
+                match: "(\\')"
                 name: keyword.operator.derivative
