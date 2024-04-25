@@ -14,6 +14,7 @@ repository:
             - include: "#functions"
             - include: "#literals"
             - include: "#operators"
+            - include: "#general"
 scopeName: source.parigp
 $schema: >-
   https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json

@@ -14,7 +14,7 @@ repository:
                 match: '(<=|>=|<|>)'
                 name: keyword.operator.comparison
             -
-                match: '[^<>](=)'
+                match: '(=)'
                 name: keyword.operator.assignment
             -
                 match: '(<<|>>)'
@@ -37,3 +37,6 @@ repository:
             -
                 match: "(\\')"
                 name: keyword.operator.derivative
+            -
+                match: '(\#)\b'
+                name: keyword.operator.cardinality

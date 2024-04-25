@@ -1,0 +1,13 @@
+---
+repository:
+    general:
+        patterns:
+            -
+                match: '\b[[:alpha:]][[:alnum:]_]*'
+                name: variable.name
+            -
+                match: '[,;\.\[\]\(\)\{\}]'
+                name: markup.punctuation
+            -
+                match: '\s'
+                name: constant.character.whitespace

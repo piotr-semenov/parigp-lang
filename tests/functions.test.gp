@@ -2,9 +2,16 @@
 
   Col([])
 ##^^^ source.parigp entity.name.function.builtins
+##   ^^^^ source.parigp markup.punctuation
 
   x = Mod(4, 5);
+##^ source.parigp variable.name
+##  ^ source.parigp keyword.operator.assignment
+##    ^^^ source.parigp entity.name.function.builtins
+##       ^ ^  ^^ source.parigp markup.punctuation
+##        ^  ^ source.parigp constant.numeric.int
   x.mod
+##^ source.parigp variable.name
 ##  ^^^ source.parigp entity.name.function.member.builtins
 
   ellinit([0, 0, 0, -1, 0]).b2
@@ -19,10 +26,18 @@
 ##^^^^^^^^^^ source.parigp entity.name.function.user
     my(counts = vector(1+upper-lower));
 ##  ^^ source.parigp keyword.control
+##     ^^^^^^ source.parigp variable.name
 ##              ^^^^^^ source.parigp entity.name.function.builtins
 
     for(i=1, #v, counts[1+v[i]-lower]++);
 ##  ^^^ source.parigp keyword.control
+##      ^     ^  ^^^^^^   ^ ^  ^^^^^ source.parigp variable.name
+##       ^ source.parigp keyword.operator.assignment
+##        ^             ^ source.parigp constant.numeric.int
+##         ^   ^       ^   ^ ^      ^   ^ source.parigp markup.punctuation
+##           ^ source.parigp keyword.operator.cardinality
+##                       ^    ^ source.parigp keyword.operator.arithmetic
+##                                   ^^ source.parigp keyword.operator.increment-decrement
     vector(#counts, i, [i-1, counts[i]])
 ##  ^^^^^^ source.parigp entity.name.function.builtins
 };
