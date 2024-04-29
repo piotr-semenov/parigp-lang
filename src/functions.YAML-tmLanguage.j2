@@ -13,22 +13,22 @@ repository:
                         match: '\b({{ scopes["entity.name.function"] | join("|") }})\b\s*(?={|\()'
                         captures:
                             1:
-                                name: entity.name.function.builtins
+                                name: entity.name.function.builtins.parigp
                     -
                         match: '\b({{ scopes["constant.language"] | join("|") }})\b\s*(\(\)|\{\}|\(\{\}\)|\{\(\)\})?'
                         captures:
                             1:
-                                name: constant.language
+                                name: constant.language.parigp
                     -
                         match: '\b({{ scopes["keyword.control"] | join("|") }})\b'
                         captures:
                             1:
-                                name: keyword.control
+                                name: keyword.control.parigp
                     -
                         match: '\.({{ scopes["entity.name.function.member"] | join("|") }})\b'
                         captures:
                             1:
-                                name: entity.name.function.member.builtins
+                                name: entity.name.function.member.builtins.parigp
 
             user-defined:
                 patterns:
@@ -36,10 +36,10 @@ repository:
                         match: '([[:alpha:]][[:alnum:]_]*)\b\s*(\(|\(\s*\{|\{\s*\()'
                         captures:
                             1:
-                                name: entity.name.function.user
+                                name: entity.name.function.user.parigp
 
                     -
                         match: '([[:alpha:]][[:alnum:]_]*)\b\s*=\s*\{?\s*(\([^\(]+\)|[[:alpha:]][[:alnum:]_]*)\s*-\s*>'
                         captures:
                             1:
-                                name: entity.name.function.user.lambda
+                                name: entity.name.function.user.lambda.parigp

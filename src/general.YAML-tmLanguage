@@ -4,10 +4,10 @@ repository:
         patterns:
             -
                 match: '\b[[:alpha:]][[:alnum:]_]*'
-                name: variable.name
+                name: variable.name.parigp
             -
                 match: '[,;\.]'
-                name: markup.punctuation
+                name: markup.punctuation.parigp
             -
                 match: '\s'
-                name: constant.character.whitespace
+                name: constant.character.whitespace.parigp

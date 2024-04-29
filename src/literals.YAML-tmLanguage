@@ -10,19 +10,19 @@ repository:
                 patterns:
                     -
                         match: '\b(0(x|X)[0-9A-Fa-f]*)\b'
-                        name: constant.numeric.hex
+                        name: constant.numeric.hex.parigp
                     -
                         match: '\b(0(b|B)[0-1]*)\b'
-                        name: constant.numeric.bin
+                        name: constant.numeric.bin.parigp
                     -
                         match: '\b([0-9]*\.[0-9]*\s*[eE][+-]?[0-9]+)\b'
-                        name: constant.numeric.float
+                        name: constant.numeric.float.parigp
                     -
                         match: '\b([0-9]+)\b'
-                        name: constant.numeric.int
+                        name: constant.numeric.int.parigp
 
             string:
                 patterns:
                     -
                         match: '"(.*)"'
-                        name: constant.character.escape
+                        name: constant.character.escape.parigp

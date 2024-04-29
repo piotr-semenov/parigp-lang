@@ -6,37 +6,37 @@ repository:
                 match: '\b(!)'
                 captures:
                     1:
-                        name: keyword.operator.factorial
+                        name: keyword.operator.factorial.parigp
             -
                 match: '(&&|\|\||!\b)'
-                name: keyword.operator.logical
+                name: keyword.operator.logical.parigp
             -
                 match: '(<=|>=|<|>)'
-                name: keyword.operator.comparison
+                name: keyword.operator.comparison.parigp
             -
                 match: '(=)'
-                name: keyword.operator.assignment
+                name: keyword.operator.assignment.parigp
             -
                 match: '(<<|>>)'
-                name: keyword.operator.shift
+                name: keyword.operator.shift.parigp
             -
                 match: '(\-\-|\+\+)'
-                name: keyword.operator.increment-decrement
+                name: keyword.operator.increment-decrement.parigp
             -
                 match: '(\-|\+|\*|\/|\\|\\/|%)'
-                name: keyword.operator.arithmetic
+                name: keyword.operator.arithmetic.parigp
             -
                 match: '(\+=|\-=|\*=|\/=|\\=|<<=|>>=)'
-                name: keyword.operator.arithmetic.assign
+                name: keyword.operator.arithmetic.assign.parigp
             -
                 match: '(\.\.)'
-                name: keyword.operator.range
+                name: keyword.operator.range.parigp
             -
                 match: '(\~)'
-                name: keyword.operator.transpose
+                name: keyword.operator.transpose.parigp
             -
                 match: "(\\')"
-                name: keyword.operator.derivative
+                name: keyword.operator.derivative.parigp
             -
                 match: '(\#)\b\s*(?!$)'
-                name: keyword.operator.cardinality
+                name: keyword.operator.cardinality.parigp
