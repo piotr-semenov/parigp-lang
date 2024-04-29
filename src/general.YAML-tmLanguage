@@ -6,7 +6,7 @@ repository:
                 match: '\b[[:alpha:]][[:alnum:]_]*'
                 name: variable.name
             -
-                match: '[,;\.\[\]\(\)\{\}]'
+                match: '[,;\.]'
                 name: markup.punctuation
             -
                 match: '\s'

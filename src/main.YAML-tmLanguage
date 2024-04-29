@@ -8,6 +8,48 @@ patterns:
     - include: "#comments"
     - include: "#code"
 repository:
+    parens:
+        patterns:
+            -
+                begin: '\('
+                end: '\)'
+                beginCaptures:
+                    0:
+                        name: punctuation.section.group.begin.parigp
+                endCaptures:
+                    0:
+                        name: punctuation.section.group.end.parigp
+                name: meta.group.parigp
+                patterns:
+                    - include: "#code"
+    braces:
+        patterns:
+            -
+                begin: '\{'
+                end: '\}'
+                beginCaptures:
+                    0:
+                        name: punctuation.section.group.begin.parigp
+                endCaptures:
+                    0:
+                        name: punctuation.section.group.end.parigp
+                name: meta.block.parigp
+                patterns:
+                    - include: "#code"
+    brackets:
+        patterns:
+            -
+                begin: '\['
+                end: '\]'
+                beginCaptures:
+                    0:
+                        name: punctuation.section.brackets.begin.parigp
+                endCaptures:
+                    0:
+                        name: punctuation.section.brackets.end.parigp
+                name: meta.brackets.parigp
+                patterns:
+                    - include: "#code"
     code:
         patterns:
             - include: "#comments"
