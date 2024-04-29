@@ -334,7 +334,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b[[:alpha:]][[:alnum:]_]*</string>
+					<string>'?\b[[:alpha:]][[:alnum:]_]*</string>
 					<key>name</key>
 					<string>variable.name.parigp</string>
 				</dict>
@@ -489,7 +489,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(\')</string>
+					<string>(\')(?!\b)</string>
 					<key>name</key>
 					<string>keyword.operator.derivative.parigp</string>
 				</dict>

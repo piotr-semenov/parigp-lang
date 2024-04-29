@@ -128,7 +128,7 @@
     "general": {
       "patterns": [
         {
-          "match": "\\b[[:alpha:]][[:alnum:]_]*",
+          "match": "'?\\b[[:alpha:]][[:alnum:]_]*",
           "name": "variable.name.parigp"
         },
         {
@@ -335,7 +335,7 @@
           "name": "keyword.operator.transpose.parigp"
         },
         {
-          "match": "(\\')",
+          "match": "(\\')(?!\\b)",
           "name": "keyword.operator.derivative.parigp"
         },
         {

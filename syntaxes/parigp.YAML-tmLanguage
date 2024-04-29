@@ -65,7 +65,7 @@ repository:
                 name: entity.name.function.user.lambda.parigp
   general:
     patterns:
-      - match: '\b[[:alpha:]][[:alnum:]_]*'
+      - match: "'?\\b[[:alpha:]][[:alnum:]_]*"
         name: variable.name.parigp
       - match: '[,;\.]'
         name: markup.punctuation.parigp
@@ -166,7 +166,7 @@ repository:
         name: keyword.operator.range.parigp
       - match: '(\~)'
         name: keyword.operator.transpose.parigp
-      - match: "(\\')"
+      - match: "(\\')(?!\\b)"
         name: keyword.operator.derivative.parigp
       - match: '(\#)\b\s*(?!$)'
         name: keyword.operator.cardinality.parigp
