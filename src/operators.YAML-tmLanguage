@@ -38,5 +38,5 @@ repository:
                 match: "(\\')"
                 name: keyword.operator.derivative
             -
-                match: '(\#)\b'
+                match: '(\#)\b\s*(?!$)'
                 name: keyword.operator.cardinality

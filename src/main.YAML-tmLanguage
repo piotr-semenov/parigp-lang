@@ -54,6 +54,7 @@ repository:
         patterns:
             - include: "#comments"
             - include: "#functions"
+            - include: "#type-hints"
             - include: "#literals"
             - include: "#operators"
             - include: "#general"
