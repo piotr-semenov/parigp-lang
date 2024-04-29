@@ -38,7 +38,7 @@ repository:
                 match: '(\~)'
                 name: keyword.operator.transpose.parigp
             -
-                match: "(\\')"
+                match: "(\\')(?!\\b)"
                 name: keyword.operator.derivative.parigp
             -
                 match: '(\#)\b\s*(?!$)'
