@@ -66,23 +66,45 @@ $(BUILD_DIR)gp_commands.tsv:
 	  gp -fq 2> /dev/null |\
 	  tr -d '\"') \"\$$(echo -e ?@ | gp -fq | tr -d '\n')\"" >> $@
 
-$(BUILD_DIR)gp_member_functions.tsv:
-	@printf 'Member\n' > $@
-	@sed -E 's|([a-z])([0-9]+)-\1([0-9]+)|\1{\2..\3}|p' \
-	 <(echo '?.' | gp -fq | grep : | cut -d':' -f1 | tr ',' '\n') |\
+# Writes PARI/GP collection (e.g. types or member functions) to $@.
+# Args:
+#	$(1): quoted string, TSV header.
+#	$(2): quoted string, PARI/GP meta command (starting with \ or ?).
+#   $(3): unqouted string, bash command to pre-process items.
+#   $(4): unquoted string, bash command to post-process items.
+define get_gp_list
+	@printf '$(1)\n' > $@ && \
+	sed -E 's|([a-z])([0-9]+)-\1([0-9]+)|\1{\2..\3}|p' \
+	 <(echo '$(2)' | gp -fq | grep : | cut -d':' -f1 | $(3) tr ',' '\n') |\
 	 sort |\
 	 uniq |\
-	 xargs -I@ $(SHELL) -c 'echo -e @"\n"' | xargs -n1 >> $@
+	 xargs -I@ $(SHELL) -c 'echo -e \@"\n"' | xargs -n1 $(4) >> $@
+endef
 
-$(BUILD_DIR)gp_builtins.json: $(addprefix $(BUILD_DIR)gp_, commands.tsv member_functions.tsv)
-	@jq -s '.[0] * .[1]' <(cat $(BUILD_DIR)gp_commands.tsv |\
-	                       jq -R -f <(echo "[inputs | split(\"\t\") | {name: .[0], type: .[1]}] |\
-	                                        group_by(.type) |\
-	                                        map({ key: (.[0].type), value: [.[] | .name] }) |\
-	                                        from_entries")) \
-	                     <(cat $(BUILD_DIR)gp_member_functions.tsv |\
-	                       jq -R '{"entity.name.function.member": [inputs]}') |\
-	 jq -r '{"scopes": .}' > $@
+$(BUILD_DIR)gp_member_functions.tsv:
+	$(call get_gp_list,'Member','?.',,)
+
+$(BUILD_DIR)gp_types.tsv:
+	$(call get_gp_list,'Type','\\t',tail -n+2 |,)
+
+$(BUILD_DIR)gp_support_commands.tsv:
+	$(call get_gp_list,'MetaCommand','?\\',tail -n+1 | cut -d'{' -f1 |,-I@ echo '\@')
+
+GP_ITEMS := commands member_functions types support_commands
+$(BUILD_DIR)gp_builtins.json: $(foreach item,$(GP_ITEMS),$(BUILD_DIR)gp_$(item).tsv)
+	@jq -n '{"scopes": [inputs] | add}' \
+	 <(cat $(BUILD_DIR)gp_commands.tsv |\
+	   jq -R -f <(echo "[inputs | split(\"\t\") | {name: .[0], type: .[1]}] |\
+	                    group_by(.type) |\
+	                    map({ key: (.[0].type), value: [.[] | .name] }) |\
+	                    from_entries")) \
+	 <(cat $(BUILD_DIR)gp_member_functions.tsv |\
+	   jq -R '{"entity.name.function.member": [inputs]}') \
+	 <(cat $(BUILD_DIR)gp_types.tsv |\
+	   jq -R '{"support.type": [inputs]}') \
+	 <(cat $(BUILD_DIR)gp_support_commands.tsv |\
+	   jq -R '{"support.function": [inputs]}') \
+	 > $@
 
 $(BUILD_DIR)parigp.sublime-tooltip: $(BUILD_DIR)gp_commands.tsv
 	@cat $< |\
