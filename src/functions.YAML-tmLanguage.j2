@@ -33,13 +33,13 @@ repository:
             user-defined:
                 patterns:
                     -
-                        match: '([[:alpha:]][[:alnum:]_]*)\b\s*(\(|\(\s*\{|\{\s*\()'
+                        match: '([[:alpha:]][[:alnum:]_]*)\b(?=\s*\(|\(\s*\{|\{\s*\()'
                         captures:
                             1:
                                 name: entity.name.function.user.parigp
 
                     -
-                        match: '([[:alpha:]][[:alnum:]_]*)\b\s*=\s*\{?\s*(\([^\(]+\)|[[:alpha:]][[:alnum:]_]*)\s*-\s*>'
+                        match: '([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*\{?\s*(\([^\(]+\)|[[:alpha:]][[:alnum:]_]*)\s*-\s*>)'
                         captures:
                             1:
                                 name: entity.name.function.user.lambda.parigp

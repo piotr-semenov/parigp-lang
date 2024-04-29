@@ -11,6 +11,9 @@ repository:
                 match: '(&&|\|\||!\b)'
                 name: keyword.operator.logical.parigp
             -
+                match: '(\->)'
+                name: keyword.operator.lambda
+            -
                 match: '(<=|>=|<|>)'
                 name: keyword.operator.comparison.parigp
             -

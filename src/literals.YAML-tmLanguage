@@ -15,7 +15,7 @@ repository:
                         match: '\b(0(b|B)[0-1]*)\b'
                         name: constant.numeric.bin.parigp
                     -
-                        match: '\b([0-9]*\.[0-9]*\s*[eE][+-]?[0-9]+)\b'
+                        match: '([0-9]*\.[0-9]*\s*([eE][+-]?[0-9]+)?)\b'
                         name: constant.numeric.float.parigp
                     -
                         match: '\b([0-9]+)\b'
