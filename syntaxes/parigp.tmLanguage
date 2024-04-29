@@ -11,7 +11,7 @@
 		<string>parigp</string>
 	</array>
 	<key>name</key>
-	<string>parigp-lang</string>
+	<string>PARI/GP</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -25,6 +25,80 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>braces</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\{</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.group.begin.parigp</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\}</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.group.end.parigp</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.block.parigp</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#code</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>brackets</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\[</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.brackets.begin.parigp</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\]</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.brackets.end.parigp</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.brackets.parigp</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#code</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
 		<key>code</key>
 		<dict>
 			<key>patterns</key>
@@ -35,7 +109,23 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#parens</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#braces</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#brackets</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#functions</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#type-hints</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -44,6 +134,10 @@
 				<dict>
 					<key>include</key>
 					<string>#operators</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#general</string>
 				</dict>
 			</array>
 		</dict>
@@ -158,7 +252,7 @@
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>entity.name.function.builtins</string>
+									<string>entity.name.function.builtins.parigp</string>
 								</dict>
 							</dict>
 							<key>match</key>
@@ -170,7 +264,7 @@
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>constant.language</string>
+									<string>constant.language.parigp</string>
 								</dict>
 							</dict>
 							<key>match</key>
@@ -182,7 +276,7 @@
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>keyword.control</string>
+									<string>keyword.control.parigp</string>
 								</dict>
 							</dict>
 							<key>match</key>
@@ -194,7 +288,7 @@
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>entity.name.function.member.builtins</string>
+									<string>entity.name.function.member.builtins.parigp</string>
 								</dict>
 							</dict>
 							<key>match</key>
@@ -212,11 +306,11 @@
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>entity.name.function.user</string>
+									<string>entity.name.function.user.parigp</string>
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>([[:alpha:]][[:alnum:]_]*)\b\s*(\(|\(\s*\{|\{\s*\()</string>
+							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*\(|\(\s*\{|\{\s*\()</string>
 						</dict>
 						<dict>
 							<key>captures</key>
@@ -224,15 +318,39 @@
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>entity.name.function.user.lambda</string>
+									<string>entity.name.function.user.lambda.parigp</string>
 								</dict>
 							</dict>
 							<key>match</key>
-							<string>([[:alpha:]][[:alnum:]_]*)\b\s*=\s*\{?\s*(\([^\(]+\)|[[:alpha:]][[:alnum:]_]*)\s*-\s*&gt;</string>
+							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*\{?\s*(\([^\(]+\)|[[:alpha:]][[:alnum:]_]*)\s*-\s*&gt;)</string>
 						</dict>
 					</array>
 				</dict>
 			</dict>
+		</dict>
+		<key>general</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b[[:alpha:]][[:alnum:]_]*</string>
+					<key>name</key>
+					<string>variable.name.parigp</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>[,;\.]</string>
+					<key>name</key>
+					<string>markup.punctuation.parigp</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s</string>
+					<key>name</key>
+					<string>constant.character.whitespace.parigp</string>
+				</dict>
+			</array>
 		</dict>
 		<key>literals</key>
 		<dict>
@@ -257,25 +375,25 @@
 							<key>match</key>
 							<string>\b(0(x|X)[0-9A-Fa-f]*)\b</string>
 							<key>name</key>
-							<string>constant.numeric.hex</string>
+							<string>constant.numeric.hex.parigp</string>
 						</dict>
 						<dict>
 							<key>match</key>
 							<string>\b(0(b|B)[0-1]*)\b</string>
 							<key>name</key>
-							<string>constant.numeric.bin</string>
+							<string>constant.numeric.bin.parigp</string>
 						</dict>
 						<dict>
 							<key>match</key>
-							<string>\b([0-9]*\.[0-9]*\s*[eE][+-]?[0-9]+)\b</string>
+							<string>([0-9]*\.[0-9]*\s*([eE][+-]?[0-9]+)?)\b</string>
 							<key>name</key>
-							<string>constant.numeric.float</string>
+							<string>constant.numeric.float.parigp</string>
 						</dict>
 						<dict>
 							<key>match</key>
 							<string>\b([0-9]+)\b</string>
 							<key>name</key>
-							<string>constant.numeric.int</string>
+							<string>constant.numeric.int.parigp</string>
 						</dict>
 					</array>
 				</dict>
@@ -287,7 +405,7 @@
 							<key>match</key>
 							<string>"(.*)"</string>
 							<key>name</key>
-							<string>constant.character.escape</string>
+							<string>constant.character.escape.parigp</string>
 						</dict>
 					</array>
 				</dict>
@@ -303,7 +421,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.operator.factorial</string>
+							<string>keyword.operator.factorial.parigp</string>
 						</dict>
 					</dict>
 					<key>match</key>
@@ -313,61 +431,128 @@
 					<key>match</key>
 					<string>(&amp;&amp;|\|\||!\b)</string>
 					<key>name</key>
-					<string>keyword.operator.logical</string>
+					<string>keyword.operator.logical.parigp</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\-&gt;)</string>
+					<key>name</key>
+					<string>keyword.operator.lambda</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(&lt;=|&gt;=|&lt;|&gt;)</string>
 					<key>name</key>
-					<string>keyword.operator.comparison</string>
+					<string>keyword.operator.comparison.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>[^&lt;&gt;](=)</string>
+					<string>(=)</string>
 					<key>name</key>
-					<string>keyword.operator.assignment</string>
+					<string>keyword.operator.assignment.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(&lt;&lt;|&gt;&gt;)</string>
 					<key>name</key>
-					<string>keyword.operator.shift</string>
+					<string>keyword.operator.shift.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(\-\-|\+\+)</string>
 					<key>name</key>
-					<string>keyword.operator.increment-decrement</string>
+					<string>keyword.operator.increment-decrement.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(\-|\+|\*|\/|\\|\\/|%)</string>
 					<key>name</key>
-					<string>keyword.operator.arithmetic</string>
+					<string>keyword.operator.arithmetic.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(\+=|\-=|\*=|\/=|\\=|&lt;&lt;=|&gt;&gt;=)</string>
 					<key>name</key>
-					<string>keyword.operator.arithmetic.assign</string>
+					<string>keyword.operator.arithmetic.assign.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(\.\.)</string>
 					<key>name</key>
-					<string>keyword.operator.range</string>
+					<string>keyword.operator.range.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(\~)</string>
 					<key>name</key>
-					<string>keyword.operator.transpose</string>
+					<string>keyword.operator.transpose.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>[\b\)](\')</string>
+					<string>(\')</string>
 					<key>name</key>
-					<string>keyword.operator.derivative</string>
+					<string>keyword.operator.derivative.parigp</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\#)\b\s*(?!$)</string>
+					<key>name</key>
+					<string>keyword.operator.cardinality.parigp</string>
+				</dict>
+			</array>
+		</dict>
+		<key>parens</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\(</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.parens.begin.parigp</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.parens.end.parigp</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.parens.parigp</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#code</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>type-hints</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.type.parigp</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>\:\s*\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b</string>
 				</dict>
 			</array>
 		</dict>
