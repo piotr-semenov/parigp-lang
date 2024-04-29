@@ -15,11 +15,11 @@ repository:
                 end: '\)'
                 beginCaptures:
                     0:
-                        name: punctuation.section.group.begin.parigp
+                        name: punctuation.section.parens.begin.parigp
                 endCaptures:
                     0:
-                        name: punctuation.section.group.end.parigp
-                name: meta.group.parigp
+                        name: punctuation.section.parens.end.parigp
+                name: meta.parens.parigp
                 patterns:
                     - include: "#code"
     braces:
