@@ -3,7 +3,7 @@ fileTypes:
     - gp
     - pari
     - parigp
-name: parigp-lang
+name: PARI/GP
 patterns:
     - include: "#comments"
     - include: "#code"

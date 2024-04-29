@@ -1,5 +1,5 @@
 {
-  "name": "parigp-lang",
+  "name": "language-parigp",
   "displayName": "PARI/GP Lang",
   "description": "Syntax highlighting for PARI/GP language",
   "version": "0.0.1",
@@ -16,7 +16,7 @@
   "contributes": {
     "languages": [
       {
-        "id": "parigp-lang",
+        "id": "parigp",
         "aliases": [
           "PARI/GP",
           "parigp"
