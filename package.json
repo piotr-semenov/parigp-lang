@@ -16,7 +16,7 @@
   "contributes": {
     "languages": [
       {
-        "id": "parigp",
+        "id": "parigp-lang",
         "aliases": [
           "PARI/GP",
           "parigp"
