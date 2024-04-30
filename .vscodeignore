@@ -2,6 +2,6 @@
 !language-configuration.json
 !package.json
 !README.md
-!LICENSE
+!LICENSE.md
 */**
 !syntaxes/parigp.tmLanguage.json
