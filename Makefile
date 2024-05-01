@@ -109,3 +109,18 @@ $(BUILD_DIR)gp_builtins.json: $(foreach item,$(GP_ITEMS),$(BUILD_DIR)gp_$(item).
 $(BUILD_DIR)parigp.sublime-tooltip: $(BUILD_DIR)gp_commands.tsv
 	@cat $< |\
 	 jq -R '[inputs | split("\t") | {(.[0]): {name: .[0], descr: .[2]}}] | add' > $@
+
+$(ROOT_DIR)images/coverage-badge.svg:
+	$(eval REFS := $(shell yq \
+	 '[.. | select(has("name") and .name != "PARI/GP") | .name] | @tsv' \
+	 $(ROOT_DIR)src/*.YAML-tmLanguage* |\
+	 xargs -n1 | sort | uniq))
+	$(eval SCOPES_UNDER_TEST := $(shell tail -n+2 $(ROOT_DIR)tests/*.test.gp |\
+	 grep -o 'source.parigp.*$$' |\
+	 xargs -n1 | sort | uniq))
+	$(eval DIFF := $(shell echo $(REFS) $(SCOPES_UNDER_TEST) | tr ' ' '\n' | sort | uniq -u | xargs -n1))
+	$(eval COVERAGE := $(shell echo "scale=4 ; 100.0 * (1.0 - $(shell echo $(DIFF) | wc -w) / $(shell echo $(REFS) | wc -w))" | bc))
+	@xsltproc --param coverage $(COVERAGE) \
+	          --output $@ \
+	          $(ROOT_DIR)/scripts/coverage-badge.xsl \
+	          $(ROOT_DIR)/scripts/coverage-badge.xsl

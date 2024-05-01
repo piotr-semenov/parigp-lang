@@ -1,5 +1,5 @@
 ---
-name: "Pre-commit"
+name: "Pre-Commit"
 
 on:
   push:
