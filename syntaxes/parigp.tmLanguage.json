@@ -21,7 +21,7 @@
           "name": "comment.block.parigp",
           "patterns": [
             {
-              "include": "#nested"
+              "include": "#comments"
             }
           ]
         }
@@ -39,19 +39,6 @@
                   "name": "comment.line.double-slash.parigp"
                 }
               }
-            }
-          ]
-        },
-        "nested": {
-          "patterns": [
-            {
-              "begin": "/\\*",
-              "end": "\\*/",
-              "patterns": [
-                {
-                  "include": "#nested"
-                }
-              ]
             }
           ]
         }
@@ -106,22 +93,86 @@
         "user-defined": {
           "patterns": [
             {
-              "match": "([[:alpha:]][[:alnum:]_]*)\\b(?=\\s*\\(|\\(\\s*\\{|\\{\\s*\\()",
-              "captures": {
+              "begin": "([[:alpha:]][[:alnum:]_]*)\\b(?=\\s*\\(|\\(\\s*\\{|\\{\\s*\\()",
+              "end": "(?<=$|=)",
+              "beginCaptures": {
                 "1": {
                   "name": "entity.name.function.user.parigp"
                 }
-              }
+              },
+              "name": "meta.function.parigp",
+              "patterns": [
+                {
+                  "begin": "(\\()",
+                  "beginCaptures": {
+                    "0": {
+                      "name": "punctuation.section.parens.begin.parigp"
+                    },
+                    "1": {
+                      "name": "punctuation.definition.parameters.begin.parigp"
+                    }
+                  },
+                  "end": "(\\))(?=\\s*=)",
+                  "endCaptures": {
+                    "0": {
+                      "name": "punctuation.section.parens.end.parigp"
+                    },
+                    "1": {
+                      "name": "punctuation.definition.parameters.end.parigp"
+                    }
+                  },
+                  "name": "meta.parameters.parigp",
+                  "patterns": [
+                    {
+                      "include": "#parens"
+                    },
+                    {
+                      "include": "#function-vars"
+                    }
+                  ]
+                }
+              ]
             },
             {
-              "match": "([[:alpha:]][[:alnum:]_]*)\\b(?=\\s*=\\s*\\{?\\s*(\\([^\\(]+\\)|[[:alpha:]][[:alnum:]_]*)\\s*-\\s*>)",
-              "captures": {
+              "begin": "([[:alpha:]][[:alnum:]_]*)\\b(?=\\s*=\\s*[^\\->]+\\s*\\-\\s*>)",
+              "end": "(?<=\\->)",
+              "beginCaptures": {
                 "1": {
                   "name": "entity.name.function.user.lambda.parigp"
                 }
-              }
+              },
+              "name": "meta.function.lambda.parigp",
+              "patterns": [
+                {
+                  "include": "#parens"
+                },
+                {
+                  "include": "#function-vars"
+                }
+              ]
             }
-          ]
+          ],
+          "repository": {
+            "function-vars": {
+              "patterns": [
+                {
+                  "match": "([[:alpha:]][[:alnum:]_]*)\\s*",
+                  "captures": {
+                    "1": {
+                      "name": "variable.parameter.function.parigp"
+                    }
+                  }
+                },
+                {
+                  "match": ",",
+                  "name": "punctuation.separator.parigp"
+                },
+                {
+                  "include": "#type-hints"
+                }
+              ]
+            }
+          }
         }
       }
     },

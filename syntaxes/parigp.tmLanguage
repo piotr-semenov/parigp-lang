@@ -176,7 +176,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#nested</string>
+							<string>#comments</string>
 						</dict>
 					</array>
 				</dict>
@@ -203,25 +203,6 @@
 							</dict>
 							<key>match</key>
 							<string>(\\\\).*$\n?</string>
-						</dict>
-					</array>
-				</dict>
-				<key>nested</key>
-				<dict>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>/\*</string>
-							<key>end</key>
-							<string>\*/</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#nested</string>
-								</dict>
-							</array>
 						</dict>
 					</array>
 				</dict>
@@ -301,7 +282,9 @@
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>captures</key>
+							<key>begin</key>
+							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*\(|\(\s*\{|\{\s*\()</string>
+							<key>beginCaptures</key>
 							<dict>
 								<key>1</key>
 								<dict>
@@ -309,11 +292,63 @@
 									<string>entity.name.function.user.parigp</string>
 								</dict>
 							</dict>
-							<key>match</key>
-							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*\(|\(\s*\{|\{\s*\()</string>
+							<key>end</key>
+							<string>(?&lt;=$|=)</string>
+							<key>name</key>
+							<string>meta.function.parigp</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>begin</key>
+									<string>(\()</string>
+									<key>beginCaptures</key>
+									<dict>
+										<key>0</key>
+										<dict>
+											<key>name</key>
+											<string>punctuation.section.parens.begin.parigp</string>
+										</dict>
+										<key>1</key>
+										<dict>
+											<key>name</key>
+											<string>punctuation.definition.parameters.begin.parigp</string>
+										</dict>
+									</dict>
+									<key>end</key>
+									<string>(\))(?=\s*=)</string>
+									<key>endCaptures</key>
+									<dict>
+										<key>0</key>
+										<dict>
+											<key>name</key>
+											<string>punctuation.section.parens.end.parigp</string>
+										</dict>
+										<key>1</key>
+										<dict>
+											<key>name</key>
+											<string>punctuation.definition.parameters.end.parigp</string>
+										</dict>
+									</dict>
+									<key>name</key>
+									<string>meta.parameters.parigp</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#parens</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>#function-vars</string>
+										</dict>
+									</array>
+								</dict>
+							</array>
 						</dict>
 						<dict>
-							<key>captures</key>
+							<key>begin</key>
+							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*[^\-&gt;]+\s*\-\s*&gt;)</string>
+							<key>beginCaptures</key>
 							<dict>
 								<key>1</key>
 								<dict>
@@ -321,10 +356,54 @@
 									<string>entity.name.function.user.lambda.parigp</string>
 								</dict>
 							</dict>
-							<key>match</key>
-							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*\{?\s*(\([^\(]+\)|[[:alpha:]][[:alnum:]_]*)\s*-\s*&gt;)</string>
+							<key>end</key>
+							<string>(?&lt;=\-&gt;)</string>
+							<key>name</key>
+							<string>meta.function.lambda.parigp</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#parens</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#function-vars</string>
+								</dict>
+							</array>
 						</dict>
 					</array>
+					<key>repository</key>
+					<dict>
+						<key>function-vars</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>captures</key>
+									<dict>
+										<key>1</key>
+										<dict>
+											<key>name</key>
+											<string>variable.parameter.function.parigp</string>
+										</dict>
+									</dict>
+									<key>match</key>
+									<string>([[:alpha:]][[:alnum:]_]*)\s*</string>
+								</dict>
+								<dict>
+									<key>match</key>
+									<string>,</string>
+									<key>name</key>
+									<string>punctuation.separator.parigp</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#type-hints</string>
+								</dict>
+							</array>
+						</dict>
+					</dict>
 				</dict>
 			</dict>
 		</dict>
