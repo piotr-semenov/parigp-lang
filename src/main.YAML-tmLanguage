@@ -1,3 +1,4 @@
+# yamllint disable rule:hyphens
 ---
 fileTypes:
     - gp
@@ -10,7 +11,7 @@ patterns:
 repository:
     parens:
         patterns:
-            -
+            -   &parens_rules
                 begin: '\('
                 end: '\)'
                 beginCaptures:
@@ -21,7 +22,7 @@ repository:
                         name: punctuation.section.parens.end.parigp
                 name: meta.parens.parigp
                 patterns:
-                    - include: "#code"
+                    - include: "#parens"
     braces:
         patterns:
             -
@@ -49,18 +50,27 @@ repository:
                         name: punctuation.section.brackets.end.parigp
                 name: meta.brackets.parigp
                 patterns:
+                    -
+                        match: '[,;]'
+                        name: markup.punctuation.separator.parigp
                     - include: "#code"
     code:
         patterns:
             - include: "#comments"
-            - include: "#parens"
+            -
+                <<: *parens_rules
+                patterns:
+                    - include: "#code"
             - include: "#braces"
             - include: "#brackets"
             - include: "#functions"
             - include: "#type-hints"
             - include: "#literals"
             - include: "#operators"
-            - include: "#general"
+            - include: '#general'
+            -
+                match: "'?\\b[[:alpha:]][[:alnum:]_]*"
+                name: variable.name.parigp
 scopeName: source.parigp
 $schema: >-
   https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json

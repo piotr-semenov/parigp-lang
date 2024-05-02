@@ -3,7 +3,7 @@ repository:
     type-hints:
         patterns:
             -
-                match: '\:\s*\b({{ scopes["support.type"] | join("|") }})\b'
+                match: '\s*\b({{ scopes["support.type"] | join("|") }})\b'
                 captures:
                     1:
                         name: support.type.parigp

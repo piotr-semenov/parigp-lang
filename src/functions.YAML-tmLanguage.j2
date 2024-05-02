@@ -1,6 +1,7 @@
 # yamllint disable rule:line-length
 ---
 repository:
+    parens: &parens_rules []
     functions:
         patterns:
             - include: "#builtins"
@@ -33,30 +34,14 @@ repository:
             user-defined:
                 patterns:
                     -
-                        begin: '([[:alpha:]][[:alnum:]_]*)\b(?=\s*\(|\(\s*\{|\{\s*\()'
-                        end: '(?<=$|=)'
+                        begin: '([[:alpha:]][[:alnum:]_]*)\b(?=(\s*\(|\(\s*\{|\{\s*\()[^=]*=)'
+                        end: '(?<=\=)'
                         beginCaptures:
                             1:
                                 name: entity.name.function.user.parigp
                         name: meta.function.parigp
                         patterns:
-                            -
-                                begin: '(\()'
-                                beginCaptures:
-                                    0:
-                                        name: punctuation.section.parens.begin.parigp
-                                    1:
-                                        name: punctuation.definition.parameters.begin.parigp
-                                end: '(\))(?=\s*=)'
-                                endCaptures:
-                                    0:
-                                        name: punctuation.section.parens.end.parigp
-                                    1:
-                                        name: punctuation.definition.parameters.end.parigp
-                                name: meta.parameters.parigp
-                                patterns:
-                                    - include: '#parens'
-                                    - include: '#function-vars'
+                            - include: '#function-vars'
                     -
                         begin: '([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*[^\->]+\s*\-\s*>)'
                         end: '(?<=\->)'
@@ -65,17 +50,33 @@ repository:
                                 name: entity.name.function.user.lambda.parigp
                         name: meta.function.lambda.parigp
                         patterns:
-                            - include: '#parens'
+                            -
+                                match: '(\->)'
+                                name: keyword.operator.lambda
                             - include: '#function-vars'
                 repository:
                     function-vars:
                         patterns:
                             -
-                                match: '([[:alpha:]][[:alnum:]_]*)\s*'
-                                captures:
-                                    1:
-                                        name: variable.parameter.function.parigp
-                            -
-                                match: ','
-                                name: punctuation.separator.parigp
+                                <<: *parens_rules
+                                patterns:
+                                    - include: '#function-vars'
+                            - include: '#general'
+                            - include: '#literals'
+                            - include: '#operators'
                             - include: '#type-hints'
+                            -
+                                match: '(?<!:\s*)([[:alpha:]][[:alnum:]_]*)\s*'
+                                name: variable.parameter.function.parigp
+                            -
+                                begin: '(\{)'
+                                end: '(\})'
+                                beginCaptures:
+                                    1:
+                                        name: meta.function.parameter.optional.begin.parigp
+                                endCaptures:
+                                    1:
+                                        name: meta.function.parameter.optional.end.parigp
+                                name: meta.function.parameter.optional.parigp
+                                patterns:
+                                    - include: '#function-vars'

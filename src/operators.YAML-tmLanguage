@@ -8,11 +8,11 @@ repository:
                     1:
                         name: keyword.operator.factorial.parigp
             -
-                match: '(&&|\|\||!\b)'
+                match: '(&&|\|\|)|(!)\b'
                 name: keyword.operator.logical.parigp
             -
-                match: '(\->)'
-                name: keyword.operator.lambda
+                match: '(?<!&)(&)'
+                name: keyword.operator.pointer.parigp
             -
                 match: '(<=|>=|<|>)'
                 name: keyword.operator.comparison.parigp

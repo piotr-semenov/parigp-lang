@@ -26,7 +26,7 @@
 ##  ^ source.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
 ##   ^ source.parigp keyword.operator.logical.parigp
 ##    ^^^^ source.parigp meta.parens.parigp variable.name.parigp
-##        ^^ source.parigp meta.parens.parigp markup.punctuation.parigp
+##        ^^ source.parigp meta.parens.parigp markup.punctuation.separator.parigp
 ##          ^^^^^ source.parigp meta.parens.parigp entity.name.function.builtins.parigp
 ##               ^ source.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
 ##                ^^^^^^ source.parigp meta.parens.parigp meta.parens.parigp constant.character.escape.parigp
@@ -50,7 +50,7 @@
 ##^ source.parigp variable.name.parigp
 ##  ^ source.parigp keyword.operator.assignment.parigp
 ##    ^^ source.parigp constant.numeric.int.parigp
-##      ^ source.parigp markup.punctuation.parigp
+##      ^ source.parigp markup.punctuation.statement-terminator.parigp
 
   [1..100]
 ##^ source.parigp meta.brackets.parigp punctuation.section.brackets.begin.parigp
@@ -61,7 +61,7 @@
   [1, 2, 3; 4, 5, 6]~
 ##^ source.parigp meta.brackets.parigp punctuation.section.brackets.begin.parigp
 ## ^  ^  ^  ^  ^  ^ source.parigp meta.brackets.parigp constant.numeric.int.parigp
-##  ^  ^  ^  ^  ^ source.parigp meta.brackets.parigp markup.punctuation.parigp
+##  ^  ^  ^  ^  ^ source.parigp meta.brackets.parigp markup.punctuation.separator.parigp
 ##                 ^ source.parigp meta.brackets.parigp punctuation.section.brackets.end.parigp
 ##                  ^ source.parigp keyword.operator.transpose.parigp
 
@@ -73,7 +73,7 @@
 ##     ^   ^ source.parigp meta.brackets.parigp meta.parens.parigp constant.numeric.int.parigp
 ##          ^ source.parigp meta.brackets.parigp meta.parens.parigp punctuation.section.parens.end.parigp
 ##           ^ source.parigp meta.brackets.parigp keyword.operator.derivative.parigp
-##            ^  ^  ^ source.parigp meta.brackets.parigp markup.punctuation.parigp
+##            ^  ^  ^ source.parigp meta.brackets.parigp markup.punctuation.separator.parigp
 ##             ^  ^  ^ source.parigp meta.brackets.parigp constant.character.whitespace.parigp
 ##                    ^^ source.parigp meta.brackets.parigp variable.name.parigp
 ##                      ^ source.parigp meta.brackets.parigp punctuation.section.brackets.end.parigp
