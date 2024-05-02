@@ -13,6 +13,9 @@ jobs:
   Compile:
     runs-on: ubuntu-latest
     steps:
+      - name: Install xsltproc
+        run: sudo apt-get install -y xsltproc
+
       - uses: actions/checkout@v4
 
       - name: Import GPG key

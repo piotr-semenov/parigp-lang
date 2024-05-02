@@ -14,7 +14,7 @@ repository:
                         name: punctuation.definition.comment.end.parigp
                 name: comment.block.parigp
                 patterns:
-                    - include: "#nested"
+                    - include: "#comments"
         repository:
             inline:
                 patterns:
@@ -25,10 +25,3 @@ repository:
                                 name: punctuation.definition.comment.parigp
                             1:
                                 name: comment.line.double-slash.parigp
-            nested:
-                patterns:
-                    -
-                        begin: '/\*'
-                        end: '\*/'
-                        patterns:
-                            - include: "#nested"
