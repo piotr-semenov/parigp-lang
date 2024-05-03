@@ -88,7 +88,7 @@ $(BUILD_DIR)gp_types.tsv:
 	$(call get_gp_list,'Type','\\t',tail -n+2 |,)
 
 $(BUILD_DIR)gp_support_commands.tsv:
-	$(call get_gp_list,'MetaCommand','?\\',tail -n+1 | cut -d'{' -f1 |,-I@ echo '\@')
+	$(call get_gp_list,'MetaCommand','?\\',tail -n+3 | cut -d'{' -f1 |,-I@ echo '\@')
 
 GP_ITEMS := commands member_functions types support_commands
 $(BUILD_DIR)gp_builtins.json: $(foreach item,$(GP_ITEMS),$(BUILD_DIR)gp_$(item).tsv)

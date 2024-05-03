@@ -64,6 +64,7 @@ repository:
             - include: "#braces"
             - include: "#brackets"
             - include: "#functions"
+            - include: '#meta-commands'
             - include: "#type-hints"
             - include: "#literals"
             - include: "#operators"

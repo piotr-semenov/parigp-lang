@@ -1,0 +1,10 @@
+# yamllint disable rule:line-length
+---
+repository:
+    meta-commands:
+        patterns:
+            -
+                match: '^\s*(##(?!\b)|#(?!\b)|\{{ scopes["support.function"] | join("|\\") }})'
+                captures:
+                    1:
+                        name: support.function.parigp
