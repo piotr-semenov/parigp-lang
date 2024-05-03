@@ -50,10 +50,14 @@ repository:
                                 name: entity.name.function.user.lambda.parigp
                         name: meta.function.lambda.parigp
                         patterns:
-                            -
-                                match: '(\->)'
-                                name: keyword.operator.lambda
                             - include: '#function-vars'
+                    -
+                        begin: '\.([[:alpha:]][[:alnum:]_]*)\b(?=[^=]*=)'
+                        end: '(?<=\=)'
+                        beginCaptures:
+                            1:
+                                name: entity.name.function.user.member.parigp
+                        name: meta.function.member.parigp
                 repository:
                     function-vars:
                         patterns:

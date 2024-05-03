@@ -312,3 +312,48 @@
 ##                      ^^ source.parigp constant.numeric.int.parigp
 ##                        ^ source.parigp meta.parens.parigp punctuation.section.parens.end.parigp
 ##                         ^ source.parigp markup.punctuation.statement-terminator.parigp
+
+  \\ Code from pages 39-40 of "User's Guide to PARI/GP"
+##^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+  x.j = {
+##^ source.parigp variable.name.parigp
+##  ^ source.parigp entity.name.function.member.builtins.parigp
+##   ^ ^ source.parigp constant.character.whitespace.parigp
+##    ^ source.parigp keyword.operator.assignment.parigp
+##      ^ source.parigp meta.block.parigp punctuation.section.group.begin.parigp
+    if (type(x) != "t_VEC" || length(x) < 14,
+##  ^^ source.parigp meta.block.parigp entity.name.function.builtins.parigp
+##    ^ source.parigp meta.block.parigp
+##     ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##      ^^^^ source.parigp meta.block.parigp meta.parens.parigp entity.name.function.builtins.parigp
+##          ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##           ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp variable.name.parigp
+##            ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##             ^  ^       ^  ^         ^ ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
+##              ^^ source.parigp meta.block.parigp meta.parens.parigp keyword.operator.comparison.parigp
+##                 ^^^^^^^ source.parigp meta.block.parigp meta.parens.parigp constant.character.escape.parigp
+##                         ^^ source.parigp meta.block.parigp meta.parens.parigp keyword.operator.logical.parigp
+##                            ^^^^^^ source.parigp meta.block.parigp meta.parens.parigp entity.name.function.builtins.parigp
+##                                  ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##                                   ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp variable.name.parigp
+##                                    ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                                        ^^ source.parigp meta.block.parigp meta.parens.parigp constant.numeric.int.parigp
+##                                          ^ source.parigp meta.block.parigp meta.parens.parigp markup.punctuation.separator.parigp
+        error("this is not a proper elliptic curve: " x)
+##      ^^^^^ source.parigp meta.block.parigp meta.parens.parigp keyword.control.parigp
+##           ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.character.escape.parigp
+##                                                   ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.character.whitespace.parigp
+##                                                    ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp variable.name.parigp
+##                                                     ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+    );
+##  ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##   ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+    x[13]
+##  ^ source.parigp meta.block.parigp variable.name.parigp
+##   ^ source.parigp meta.block.parigp meta.brackets.parigp punctuation.section.brackets.begin.parigp
+##    ^^ source.parigp meta.block.parigp meta.brackets.parigp constant.numeric.int.parigp
+##      ^ source.parigp meta.block.parigp meta.brackets.parigp punctuation.section.brackets.end.parigp
+  };
+##^ source.parigp meta.block.parigp punctuation.section.group.end.parigp
+## ^ source.parigp markup.punctuation.statement-terminator.parigp

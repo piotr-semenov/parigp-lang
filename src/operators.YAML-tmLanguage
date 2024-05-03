@@ -14,8 +14,11 @@ repository:
                 match: '(?<!&)(&)'
                 name: keyword.operator.pointer.parigp
             -
-                match: '(<=|>=|<|>)'
+                match: '(<=|>=|<|(?<!\-)>|!=)'
                 name: keyword.operator.comparison.parigp
+            -
+                match: '(\->)'
+                name: keyword.operator.lambda
             -
                 match: '(=)'
                 name: keyword.operator.assignment.parigp
