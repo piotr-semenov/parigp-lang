@@ -154,7 +154,15 @@
                   "name": "entity.name.function.user.member.parigp"
                 }
               },
-              "name": "meta.function.member.parigp"
+              "name": "meta.function.user.member.parigp",
+              "patterns": [
+                {
+                  "include": "#general"
+                },
+                {
+                  "include": "#operators"
+                }
+              ]
             }
           ],
           "repository": {
@@ -408,6 +416,10 @@
           "name": "keyword.operator.pointer.parigp"
         },
         {
+          "match": "(<<|>>)",
+          "name": "keyword.operator.shift.parigp"
+        },
+        {
           "match": "(<=|>=|<|(?<!\\-)>|!=)",
           "name": "keyword.operator.comparison.parigp"
         },
@@ -420,20 +432,16 @@
           "name": "keyword.operator.assignment.parigp"
         },
         {
-          "match": "(<<|>>)",
-          "name": "keyword.operator.shift.parigp"
-        },
-        {
           "match": "(\\-\\-|\\+\\+)",
           "name": "keyword.operator.increment-decrement.parigp"
         },
         {
-          "match": "(\\-|\\+|\\*|\\/|\\\\|\\\\/|%)",
-          "name": "keyword.operator.arithmetic.parigp"
-        },
-        {
           "match": "(\\+=|\\-=|\\*=|\\/=|\\\\=|<<=|>>=)",
           "name": "keyword.operator.arithmetic.assign.parigp"
+        },
+        {
+          "match": "(\\-|\\+|\\*|\\/|\\\\|\\\\/|%)",
+          "name": "keyword.operator.arithmetic.parigp"
         },
         {
           "match": "(\\.\\.)",

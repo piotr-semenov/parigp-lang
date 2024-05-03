@@ -384,7 +384,18 @@
 							<key>end</key>
 							<string>(?&lt;=\=)</string>
 							<key>name</key>
-							<string>meta.function.member.parigp</string>
+							<string>meta.function.user.member.parigp</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#general</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#operators</string>
+								</dict>
+							</array>
 						</dict>
 					</array>
 					<key>repository</key>
@@ -620,6 +631,12 @@
 				</dict>
 				<dict>
 					<key>match</key>
+					<string>(&lt;&lt;|&gt;&gt;)</string>
+					<key>name</key>
+					<string>keyword.operator.shift.parigp</string>
+				</dict>
+				<dict>
+					<key>match</key>
 					<string>(&lt;=|&gt;=|&lt;|(?&lt;!\-)&gt;|!=)</string>
 					<key>name</key>
 					<string>keyword.operator.comparison.parigp</string>
@@ -638,27 +655,21 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(&lt;&lt;|&gt;&gt;)</string>
-					<key>name</key>
-					<string>keyword.operator.shift.parigp</string>
-				</dict>
-				<dict>
-					<key>match</key>
 					<string>(\-\-|\+\+)</string>
 					<key>name</key>
 					<string>keyword.operator.increment-decrement.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(\-|\+|\*|\/|\\|\\/|%)</string>
-					<key>name</key>
-					<string>keyword.operator.arithmetic.parigp</string>
-				</dict>
-				<dict>
-					<key>match</key>
 					<string>(\+=|\-=|\*=|\/=|\\=|&lt;&lt;=|&gt;&gt;=)</string>
 					<key>name</key>
 					<string>keyword.operator.arithmetic.assign.parigp</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\-|\+|\*|\/|\\|\\/|%)</string>
+					<key>name</key>
+					<string>keyword.operator.arithmetic.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
