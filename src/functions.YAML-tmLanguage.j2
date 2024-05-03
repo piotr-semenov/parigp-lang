@@ -57,7 +57,10 @@ repository:
                         beginCaptures:
                             1:
                                 name: entity.name.function.user.member.parigp
-                        name: meta.function.member.parigp
+                        name: meta.function.user.member.parigp
+                        patterns:
+                            - include: '#general'
+                            - include: '#operators'
                 repository:
                     function-vars:
                         patterns:

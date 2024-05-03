@@ -1,5 +1,17 @@
 ## SYNTAX TEST "source.parigp" "Functions"
 
+  -oo
+##^ source.parigp keyword.operator.arithmetic.parigp
+## ^^ source.parigp constant.language.parigp
+
+  x = Euler() * I
+##^ source.parigp variable.name.parigp
+## ^ ^ source.parigp constant.character.whitespace.parigp
+##  ^ source.parigp keyword.operator.assignment.parigp
+##    ^^^^^     ^ source.parigp constant.language.parigp
+##           ^ ^ source.parigp constant.character.whitespace.parigp
+##            ^ source.parigp keyword.operator.arithmetic.parigp
+
   Col([])
 ##^^^ source.parigp entity.name.function.builtins.parigp
 ##   ^ source.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
@@ -315,11 +327,12 @@
 
   \\ Code from pages 39-40 of "User's Guide to PARI/GP"
 ##^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
-  x.j = {
+  x.r = {
 ##^ source.parigp variable.name.parigp
-##  ^ source.parigp entity.name.function.member.builtins.parigp
-##   ^ ^ source.parigp constant.character.whitespace.parigp
-##    ^ source.parigp keyword.operator.assignment.parigp
+##  ^ source.parigp entity.name.function.user.member.parigp
+##   ^ source.parigp meta.function.user.member.parigp constant.character.whitespace.parigp
+##    ^ source.parigp meta.function.user.member.parigp keyword.operator.assignment.parigp
+##     ^ source.parigp constant.character.whitespace.parigp
 ##      ^ source.parigp meta.block.parigp punctuation.section.group.begin.parigp
     if (type(x) != "t_VEC" || length(x) < 14,
 ##  ^^ source.parigp meta.block.parigp entity.name.function.builtins.parigp

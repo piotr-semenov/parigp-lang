@@ -117,8 +117,9 @@ $(ROOT_DIR)images/coverage-badge.svg:
 	 xargs -n1 | sort | uniq))
 	$(eval SCOPES_UNDER_TEST := $(shell tail -n+2 $(ROOT_DIR)tests/*.test.gp |\
 	 grep -o 'source.parigp.*$$' |\
-	 xargs -n1 | sort | uniq))
+	 xargs -n1 | sort | uniq | grep -v source.parigp))
 	$(eval DIFF := $(shell echo $(REFS) $(SCOPES_UNDER_TEST) | tr ' ' '\n' | sort | uniq -u | xargs -n1))
+	@$(info $(DIFF))
 	$(eval COVERAGE := $(shell echo "scale=4 ; 100.0 * (1.0 - $(shell echo $(DIFF) | wc -w) / $(shell echo $(REFS) | wc -w))" | bc))
 	@xsltproc --param coverage $(COVERAGE) \
 	          --output $@ \

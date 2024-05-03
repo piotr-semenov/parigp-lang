@@ -14,6 +14,9 @@ repository:
                 match: '(?<!&)(&)'
                 name: keyword.operator.pointer.parigp
             -
+                match: '(<<|>>)'
+                name: keyword.operator.shift.parigp
+            -
                 match: '(<=|>=|<|(?<!\-)>|!=)'
                 name: keyword.operator.comparison.parigp
             -
@@ -23,17 +26,14 @@ repository:
                 match: '(=)'
                 name: keyword.operator.assignment.parigp
             -
-                match: '(<<|>>)'
-                name: keyword.operator.shift.parigp
-            -
                 match: '(\-\-|\+\+)'
                 name: keyword.operator.increment-decrement.parigp
             -
-                match: '(\-|\+|\*|\/|\\|\\/|%)'
-                name: keyword.operator.arithmetic.parigp
-            -
                 match: '(\+=|\-=|\*=|\/=|\\=|<<=|>>=)'
                 name: keyword.operator.arithmetic.assign.parigp
+            -
+                match: '(\-|\+|\*|\/|\\|\\/|%)'
+                name: keyword.operator.arithmetic.parigp
             -
                 match: '(\.\.)'
                 name: keyword.operator.range.parigp
