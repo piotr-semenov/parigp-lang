@@ -92,6 +92,12 @@
 					<key>patterns</key>
 					<array>
 						<dict>
+							<key>match</key>
+							<string>[,;]</string>
+							<key>name</key>
+							<string>markup.punctuation.separator.parigp</string>
+						</dict>
+						<dict>
 							<key>include</key>
 							<string>#code</string>
 						</dict>
@@ -108,8 +114,35 @@
 					<string>#comments</string>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#parens</string>
+					<key>begin</key>
+					<string>\(</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.parens.begin.parigp</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.parens.end.parigp</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.parens.parigp</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#code</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -138,6 +171,12 @@
 				<dict>
 					<key>include</key>
 					<string>#general</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>'?\b[[:alpha:]][[:alnum:]_]*</string>
+					<key>name</key>
+					<string>variable.name.parigp</string>
 				</dict>
 			</array>
 		</dict>
@@ -283,7 +322,7 @@
 					<array>
 						<dict>
 							<key>begin</key>
-							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*\(|\(\s*\{|\{\s*\()</string>
+							<string>([[:alpha:]][[:alnum:]_]*)\b(?=(\s*\(|\(\s*\{|\{\s*\()[^=]*=)</string>
 							<key>beginCaptures</key>
 							<dict>
 								<key>1</key>
@@ -293,55 +332,14 @@
 								</dict>
 							</dict>
 							<key>end</key>
-							<string>(?&lt;=$|=)</string>
+							<string>(?&lt;=\=)</string>
 							<key>name</key>
 							<string>meta.function.parigp</string>
 							<key>patterns</key>
 							<array>
 								<dict>
-									<key>begin</key>
-									<string>(\()</string>
-									<key>beginCaptures</key>
-									<dict>
-										<key>0</key>
-										<dict>
-											<key>name</key>
-											<string>punctuation.section.parens.begin.parigp</string>
-										</dict>
-										<key>1</key>
-										<dict>
-											<key>name</key>
-											<string>punctuation.definition.parameters.begin.parigp</string>
-										</dict>
-									</dict>
-									<key>end</key>
-									<string>(\))(?=\s*=)</string>
-									<key>endCaptures</key>
-									<dict>
-										<key>0</key>
-										<dict>
-											<key>name</key>
-											<string>punctuation.section.parens.end.parigp</string>
-										</dict>
-										<key>1</key>
-										<dict>
-											<key>name</key>
-											<string>punctuation.definition.parameters.end.parigp</string>
-										</dict>
-									</dict>
-									<key>name</key>
-									<string>meta.parameters.parigp</string>
-									<key>patterns</key>
-									<array>
-										<dict>
-											<key>include</key>
-											<string>#parens</string>
-										</dict>
-										<dict>
-											<key>include</key>
-											<string>#function-vars</string>
-										</dict>
-									</array>
+									<key>include</key>
+									<string>#function-vars</string>
 								</dict>
 							</array>
 						</dict>
@@ -363,8 +361,10 @@
 							<key>patterns</key>
 							<array>
 								<dict>
-									<key>include</key>
-									<string>#parens</string>
+									<key>match</key>
+									<string>(\-&gt;)</string>
+									<key>name</key>
+									<string>keyword.operator.lambda</string>
 								</dict>
 								<dict>
 									<key>include</key>
@@ -380,26 +380,88 @@
 							<key>patterns</key>
 							<array>
 								<dict>
-									<key>captures</key>
+									<key>begin</key>
+									<string>\(</string>
+									<key>beginCaptures</key>
 									<dict>
-										<key>1</key>
+										<key>0</key>
 										<dict>
 											<key>name</key>
-											<string>variable.parameter.function.parigp</string>
+											<string>punctuation.section.parens.begin.parigp</string>
 										</dict>
 									</dict>
-									<key>match</key>
-									<string>([[:alpha:]][[:alnum:]_]*)\s*</string>
+									<key>end</key>
+									<string>\)</string>
+									<key>endCaptures</key>
+									<dict>
+										<key>0</key>
+										<dict>
+											<key>name</key>
+											<string>punctuation.section.parens.end.parigp</string>
+										</dict>
+									</dict>
+									<key>name</key>
+									<string>meta.parens.parigp</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#function-vars</string>
+										</dict>
+									</array>
 								</dict>
 								<dict>
-									<key>match</key>
-									<string>,</string>
-									<key>name</key>
-									<string>punctuation.separator.parigp</string>
+									<key>include</key>
+									<string>#general</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#literals</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#operators</string>
 								</dict>
 								<dict>
 									<key>include</key>
 									<string>#type-hints</string>
+								</dict>
+								<dict>
+									<key>match</key>
+									<string>(?&lt;!:\s*)([[:alpha:]][[:alnum:]_]*)\s*</string>
+									<key>name</key>
+									<string>variable.parameter.function.parigp</string>
+								</dict>
+								<dict>
+									<key>begin</key>
+									<string>(\{)</string>
+									<key>beginCaptures</key>
+									<dict>
+										<key>1</key>
+										<dict>
+											<key>name</key>
+											<string>meta.function.parameter.optional.begin.parigp</string>
+										</dict>
+									</dict>
+									<key>end</key>
+									<string>(\})</string>
+									<key>endCaptures</key>
+									<dict>
+										<key>1</key>
+										<dict>
+											<key>name</key>
+											<string>meta.function.parameter.optional.end.parigp</string>
+										</dict>
+									</dict>
+									<key>name</key>
+									<string>meta.function.parameter.optional.parigp</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#function-vars</string>
+										</dict>
+									</array>
 								</dict>
 							</array>
 						</dict>
@@ -413,15 +475,21 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>'?\b[[:alpha:]][[:alnum:]_]*</string>
+					<string>;</string>
 					<key>name</key>
-					<string>variable.name.parigp</string>
+					<string>markup.punctuation.statement-terminator.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>[,;\.]</string>
+					<string>:</string>
 					<key>name</key>
-					<string>markup.punctuation.parigp</string>
+					<string>markup.annotation.parigp</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>,</string>
+					<key>name</key>
+					<string>markup.punctuation.separator.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -508,15 +576,15 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(&amp;&amp;|\|\||!\b)</string>
+					<string>(&amp;&amp;|\|\|)|(!)\b</string>
 					<key>name</key>
 					<string>keyword.operator.logical.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(\-&gt;)</string>
+					<string>(?&lt;!&amp;)(&amp;)</string>
 					<key>name</key>
-					<string>keyword.operator.lambda</string>
+					<string>keyword.operator.pointer.parigp</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -611,7 +679,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#code</string>
+							<string>#parens</string>
 						</dict>
 					</array>
 				</dict>
@@ -631,7 +699,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\:\s*\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b</string>
+					<string>\s*\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b</string>
 				</dict>
 			</array>
 		</dict>

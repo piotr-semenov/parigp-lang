@@ -24,6 +24,20 @@ repository:
                 name: punctuation.definition.comment.parigp
               1:
                 name: comment.line.double-slash.parigp
+  parens:
+    patterns:
+      - &parens_rules
+        begin: '\('
+        end: '\)'
+        beginCaptures:
+          0:
+            name: punctuation.section.parens.begin.parigp
+        endCaptures:
+          0:
+            name: punctuation.section.parens.end.parigp
+        name: meta.parens.parigp
+        patterns:
+          - include: "#parens"
   functions:
     patterns:
       - include: "#builtins"
@@ -49,29 +63,14 @@ repository:
                 name: entity.name.function.member.builtins.parigp
       user-defined:
         patterns:
-          - begin: '([[:alpha:]][[:alnum:]_]*)\b(?=\s*\(|\(\s*\{|\{\s*\()'
-            end: '(?<=$|=)'
+          - begin: '([[:alpha:]][[:alnum:]_]*)\b(?=(\s*\(|\(\s*\{|\{\s*\()[^=]*=)'
+            end: '(?<=\=)'
             beginCaptures:
               1:
                 name: entity.name.function.user.parigp
             name: meta.function.parigp
             patterns:
-              - begin: '(\()'
-                beginCaptures:
-                  0:
-                    name: punctuation.section.parens.begin.parigp
-                  1:
-                    name: punctuation.definition.parameters.begin.parigp
-                end: '(\))(?=\s*=)'
-                endCaptures:
-                  0:
-                    name: punctuation.section.parens.end.parigp
-                  1:
-                    name: punctuation.definition.parameters.end.parigp
-                name: meta.parameters.parigp
-                patterns:
-                  - include: '#parens'
-                  - include: '#function-vars'
+              - include: '#function-vars'
           - begin: '([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*[^\->]+\s*\-\s*>)'
             end: '(?<=\->)'
             beginCaptures:
@@ -79,24 +78,40 @@ repository:
                 name: entity.name.function.user.lambda.parigp
             name: meta.function.lambda.parigp
             patterns:
-              - include: '#parens'
+              - match: '(\->)'
+                name: keyword.operator.lambda
               - include: '#function-vars'
         repository:
           function-vars:
             patterns:
-              - match: '([[:alpha:]][[:alnum:]_]*)\s*'
-                captures:
-                  1:
-                    name: variable.parameter.function.parigp
-              - match: ','
-                name: punctuation.separator.parigp
+              - !!merge <<: *parens_rules
+                patterns:
+                  - include: '#function-vars'
+              - include: '#general'
+              - include: '#literals'
+              - include: '#operators'
               - include: '#type-hints'
+              - match: '(?<!:\s*)([[:alpha:]][[:alnum:]_]*)\s*'
+                name: variable.parameter.function.parigp
+              - begin: '(\{)'
+                end: '(\})'
+                beginCaptures:
+                  1:
+                    name: meta.function.parameter.optional.begin.parigp
+                endCaptures:
+                  1:
+                    name: meta.function.parameter.optional.end.parigp
+                name: meta.function.parameter.optional.parigp
+                patterns:
+                  - include: '#function-vars'
   general:
     patterns:
-      - match: "'?\\b[[:alpha:]][[:alnum:]_]*"
-        name: variable.name.parigp
-      - match: '[,;\.]'
-        name: markup.punctuation.parigp
+      - match: ';'
+        name: markup.punctuation.statement-terminator.parigp
+      - match: ':'
+        name: markup.annotation.parigp
+      - match: ','
+        name: markup.punctuation.separator.parigp
       - match: '\s'
         name: constant.character.whitespace.parigp
   literals:
@@ -118,19 +133,6 @@ repository:
         patterns:
           - match: '"(.*)"'
             name: constant.character.escape.parigp
-  parens:
-    patterns:
-      - begin: '\('
-        end: '\)'
-        beginCaptures:
-          0:
-            name: punctuation.section.parens.begin.parigp
-        endCaptures:
-          0:
-            name: punctuation.section.parens.end.parigp
-        name: meta.parens.parigp
-        patterns:
-          - include: "#code"
   braces:
     patterns:
       - begin: '\{'
@@ -156,28 +158,34 @@ repository:
             name: punctuation.section.brackets.end.parigp
         name: meta.brackets.parigp
         patterns:
+          - match: '[,;]'
+            name: markup.punctuation.separator.parigp
           - include: "#code"
   code:
     patterns:
       - include: "#comments"
-      - include: "#parens"
+      - !!merge <<: *parens_rules
+        patterns:
+          - include: "#code"
       - include: "#braces"
       - include: "#brackets"
       - include: "#functions"
       - include: "#type-hints"
       - include: "#literals"
       - include: "#operators"
-      - include: "#general"
+      - include: '#general'
+      - match: "'?\\b[[:alpha:]][[:alnum:]_]*"
+        name: variable.name.parigp
   operators:
     patterns:
       - match: '\b(!)'
         captures:
           1:
             name: keyword.operator.factorial.parigp
-      - match: '(&&|\|\||!\b)'
+      - match: '(&&|\|\|)|(!)\b'
         name: keyword.operator.logical.parigp
-      - match: '(\->)'
-        name: keyword.operator.lambda
+      - match: '(?<!&)(&)'
+        name: keyword.operator.pointer.parigp
       - match: '(<=|>=|<|>)'
         name: keyword.operator.comparison.parigp
       - match: '(=)'
@@ -200,10 +208,11 @@ repository:
         name: keyword.operator.cardinality.parigp
   type-hints:
     patterns:
-      - match: '\:\s*\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b'
+      - match: '\s*\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b'
         captures:
           1:
             name: support.type.parigp
+# yamllint disable rule:hyphens
 fileTypes:
   - gp
   - pari
