@@ -3,7 +3,7 @@
 repository:
   comments:
     patterns:
-      - include: "#inline"
+      - include: '#inline'
       - begin: '/\*'
         beginCaptures:
           0:
@@ -14,7 +14,7 @@ repository:
             name: punctuation.definition.comment.end.parigp
         name: comment.block.parigp
         patterns:
-          - include: "#comments"
+          - include: '#comments'
     repository:
       inline:
         patterns:
@@ -37,11 +37,11 @@ repository:
             name: punctuation.section.parens.end.parigp
         name: meta.parens.parigp
         patterns:
-          - include: "#parens"
+          - include: '#parens'
   functions:
     patterns:
-      - include: "#builtins"
-      - include: "#user-defined"
+      - include: '#builtins'
+      - include: '#user-defined'
     repository:
       builtins:
         patterns:
@@ -123,8 +123,8 @@ repository:
         name: constant.character.whitespace.parigp
   literals:
     patterns:
-      - include: "#numeric"
-      - include: "#string"
+      - include: '#numeric'
+      - include: '#string'
     repository:
       numeric:
         patterns:
@@ -152,7 +152,7 @@ repository:
             name: punctuation.section.group.end.parigp
         name: meta.block.parigp
         patterns:
-          - include: "#code"
+          - include: '#code'
   brackets:
     patterns:
       - begin: '\['
@@ -167,20 +167,20 @@ repository:
         patterns:
           - match: '[,;]'
             name: markup.punctuation.separator.parigp
-          - include: "#code"
+          - include: '#code'
   code:
     patterns:
-      - include: "#comments"
+      - include: '#comments'
       - !!merge <<: *parens_rules
         patterns:
-          - include: "#code"
-      - include: "#braces"
-      - include: "#brackets"
-      - include: "#functions"
+          - include: '#code'
+      - include: '#braces'
+      - include: '#brackets'
+      - include: '#functions'
       - include: '#meta-commands'
-      - include: "#type-hints"
-      - include: "#literals"
-      - include: "#operators"
+      - include: '#type-hints'
+      - include: '#literals'
+      - include: '#operators'
       - include: '#general'
       - match: "'?\\b[[:alpha:]][[:alnum:]_]*"
         name: variable.name.parigp
@@ -235,8 +235,8 @@ fileTypes:
   - parigp
 name: PARI/GP
 patterns:
-  - include: "#comments"
-  - include: "#code"
+  - include: '#comments'
+  - include: '#code'
 scopeName: source.parigp
 $schema: >-
   https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
