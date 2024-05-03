@@ -2,8 +2,8 @@
 repository:
     literals:
         patterns:
-            - include: "#numeric"
-            - include: "#string"
+            - include: '#numeric'
+            - include: '#string'
 
         repository:
             numeric:

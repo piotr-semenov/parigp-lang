@@ -2,7 +2,7 @@
 repository:
     comments:
         patterns:
-            - include: "#inline"
+            - include: '#inline'
             -
                 begin: '/\*'
                 beginCaptures:
@@ -14,7 +14,7 @@ repository:
                         name: punctuation.definition.comment.end.parigp
                 name: comment.block.parigp
                 patterns:
-                    - include: "#comments"
+                    - include: '#comments'
         repository:
             inline:
                 patterns:
