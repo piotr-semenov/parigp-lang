@@ -158,6 +158,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#meta-commands</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#type-hints</string>
 				</dict>
 				<dict>
@@ -361,16 +365,26 @@
 							<key>patterns</key>
 							<array>
 								<dict>
-									<key>match</key>
-									<string>(\-&gt;)</string>
-									<key>name</key>
-									<string>keyword.operator.lambda</string>
-								</dict>
-								<dict>
 									<key>include</key>
 									<string>#function-vars</string>
 								</dict>
 							</array>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>\.([[:alpha:]][[:alnum:]_]*)\b(?=[^=]*=)</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>entity.name.function.user.member.parigp</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>(?&lt;=\=)</string>
+							<key>name</key>
+							<string>meta.function.member.parigp</string>
 						</dict>
 					</array>
 					<key>repository</key>
@@ -558,6 +572,24 @@
 				</dict>
 			</dict>
 		</dict>
+		<key>meta-commands</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.parigp</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>^\s*(##(?!\b)|#(?!\b)|\\B |\\ |\\a |\\c |\\d |\\e |\\g |\\gf|\\gm|\\h |\\l |\\m |\\o |\\p |\\pb|\\ps|\\q |\\r |\\s |\\t |\\u |\\um |\\v |\\w |\\x |\\y )</string>
+				</dict>
+			</array>
+		</dict>
 		<key>operators</key>
 		<dict>
 			<key>patterns</key>
@@ -588,9 +620,15 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(&lt;=|&gt;=|&lt;|&gt;)</string>
+					<string>(&lt;=|&gt;=|&lt;|(?&lt;!\-)&gt;|!=)</string>
 					<key>name</key>
 					<string>keyword.operator.comparison.parigp</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(\-&gt;)</string>
+					<key>name</key>
+					<string>keyword.operator.lambda</string>
 				</dict>
 				<dict>
 					<key>match</key>
