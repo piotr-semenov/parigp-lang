@@ -57,13 +57,13 @@ repository:
     code:
         patterns:
             - include: '#comments'
+            - include: '#functions'
             -
                 <<: *parens_rules
                 patterns:
                     - include: '#code'
             - include: '#braces'
             - include: '#brackets'
-            - include: '#functions'
             - include: '#meta-commands'
             - include: '#type-hints'
             - include: '#literals'

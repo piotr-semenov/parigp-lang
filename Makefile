@@ -26,13 +26,14 @@ build:	## Build Textmate grammar for PARI/GP.
 build: $(shell echo $(BUILD_DIR)parigp.{JSON-,YAML-,}tmLanguage)
 	@cp $< $(BUILD_DIR)parigp.tmLanguage.json
 
+J2_TEMPLATES := $(wildcard $(ROOT_DIR)src/*.j2)
+J2_RENDERS := $(J2_TEMPLATES:.j2=)
+
 .PHONY: clean
 clean:	## Clean the build targets.
 clean:
-	@rm -f $(BUILD_DIR)*
+	@rm -f $(BUILD_DIR)* $(ROOT_DIR)/images/coverage-badge.svg $(J2_RENDERS)
 
-J2_TEMPLATES := $(wildcard $(ROOT_DIR)src/*.j2)
-J2_RENDERS := $(J2_TEMPLATES:.j2=)
 $(BUILD_DIR)parigp.YAML-tmLanguage: $(J2_RENDERS) | $(BUILD_DIR)
 	@yq ea '. as $$item ireduce ({}; . * $$item )' $(ROOT_DIR)src/*.YAML-tmLanguage > $@
 

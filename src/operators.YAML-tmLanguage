@@ -32,7 +32,7 @@ repository:
                 match: '(\+=|\-=|\*=|\/=|\\=|<<=|>>=)'
                 name: keyword.operator.arithmetic.assign.parigp
             -
-                match: '(\-|\+|\*|\/|\\|\\/|%)'
+                match: '(\-|\+|\*|\^|\/|\\|\\/|%)'
                 name: keyword.operator.arithmetic.parigp
             -
                 match: '(\.\.)'
