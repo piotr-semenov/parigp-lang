@@ -114,6 +114,10 @@
 					<string>#comments</string>
 				</dict>
 				<dict>
+					<key>include</key>
+					<string>#functions</string>
+				</dict>
+				<dict>
 					<key>begin</key>
 					<string>\(</string>
 					<key>beginCaptures</key>
@@ -151,10 +155,6 @@
 				<dict>
 					<key>include</key>
 					<string>#brackets</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#functions</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -349,7 +349,7 @@
 						</dict>
 						<dict>
 							<key>begin</key>
-							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*[^\-&gt;]+\s*\-\s*&gt;)</string>
+							<string>([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*(\(([^()]|(\g&lt;2&gt;))*\)|[[:alpha:]][[:alnum:]_]*)\s*\-\s*&gt;)</string>
 							<key>beginCaptures</key>
 							<dict>
 								<key>1</key>
@@ -367,6 +367,40 @@
 								<dict>
 									<key>include</key>
 									<string>#function-vars</string>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>(\(([^()]|(\g&lt;0&gt;))*\)|[[:alpha:]][[:alnum:]_]*|\{.+\})(?=\s*\-\s*&gt;)</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>entity.name.function.user.lambda.anonymous.parigp</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#function-vars</string>
+										</dict>
+									</array>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>(?&lt;=\-&gt;)</string>
+							<key>name</key>
+							<string>meta.function.lambda.anonymous.parigp</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#general</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#operators</string>
 								</dict>
 							</array>
 						</dict>
@@ -667,7 +701,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(\-|\+|\*|\/|\\|\\/|%)</string>
+					<string>(\-|\+|\*|\^|\/|\\|\\/|%)</string>
 					<key>name</key>
 					<string>keyword.operator.arithmetic.parigp</string>
 				</dict>
