@@ -6,6 +6,7 @@
   -123 - .123E-07 + 043664.32
 ##^    ^          ^ source.parigp keyword.operator.arithmetic.parigp
 ## ^^^ source.parigp constant.numeric.int.parigp
+##    ^ ^        ^ ^ source.parigp constant.character.whitespace.parigp
 ##       ^^^^^^^^   ^^^^^^^^^ source.parigp constant.numeric.float.parigp
 
   00432
@@ -18,10 +19,10 @@
 ##^^^^^^^^^^ source.parigp constant.numeric.bin.parigp
 
   "Hello, world!"
-## ^^^^^^^^^^^^^ source.parigp constant.character.escape.parigp
+##^^^^^^^^^^^^^^^ source.parigp constant.character.escape.parigp
 
   s = "Lorem_ipsum;"
 ##^ source.parigp variable.name.parigp
 ## ^ ^ source.parigp constant.character.whitespace.parigp
 ##  ^ source.parigp keyword.operator.assignment.parigp
-##    ^^^^^^^^^^^^^ source.parigp constant.character.escape.parigp
+##    ^^^^^^^^^^^^^^ source.parigp constant.character.escape.parigp

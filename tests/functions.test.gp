@@ -9,6 +9,8 @@
 ## ^ ^ source.parigp constant.character.whitespace.parigp
 ##  ^ source.parigp keyword.operator.assignment.parigp
 ##    ^^^^^     ^ source.parigp constant.language.parigp
+##         ^ source.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##          ^ source.parigp meta.parens.parigp punctuation.section.parens.end.parigp
 ##           ^ ^ source.parigp constant.character.whitespace.parigp
 ##            ^ source.parigp keyword.operator.arithmetic.parigp
 
@@ -21,6 +23,7 @@
 
   x = Mod(4, 5);
 ##^ source.parigp variable.name.parigp
+## ^ ^ source.parigp constant.character.whitespace.parigp
 ##  ^ source.parigp keyword.operator.assignment.parigp
 ##    ^^^ source.parigp entity.name.function.builtins.parigp
 ##       ^ source.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
@@ -32,6 +35,7 @@
 
   x.mod
 ##^ source.parigp variable.name.parigp
+## ^ source.parigp markup.punctuation.member.parigp
 ##  ^^^ source.parigp entity.name.function.member.builtins.parigp
 
   ellinit([0, 0, 0, -1, 0]).b2
@@ -44,6 +48,7 @@
 ##                  ^ source.parigp meta.parens.parigp meta.brackets.parigp keyword.operator.arithmetic.parigp
 ##                       ^ source.parigp meta.parens.parigp punctuation.section.brackets.end.parigp
 ##                        ^ source.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                         ^ source.parigp markup.punctuation.member.parigp
 ##                          ^^ source.parigp entity.name.function.member.builtins.parigp
 
   allocatemem();
@@ -76,13 +81,15 @@
 ##                                           ^ source.parigp meta.function.lambda.parigp meta.parens.parigp meta.function.parameter.optional.parigp constant.numeric.int.parigp
 ##                                            ^ source.parigp meta.function.lambda.parigp meta.parens.parigp meta.function.parameter.optional.end.parigp
 ##                                             ^ source.parigp meta.function.lambda.parigp meta.parens.parigp punctuation.section.parens.end.parigp
-##                                              ^  ^ source.parigp constant.character.whitespace.parigp
+##                                              ^ source.parigp meta.function.lambda.parigp constant.character.whitespace.parigp
 ##                                               ^^ source.parigp keyword.operator.lambda
+##                                                 ^ source.parigp constant.character.whitespace.parigp
 ##                                                  ^ source.parigp meta.block.parigp punctuation.section.group.begin.parigp
 ##                                                   ^                     ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
 ##                                                    ^^^^^^ source.parigp meta.block.parigp keyword.control.parigp
 ##                                                          ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
 ##                                                           ^   ^   ^ source.parigp meta.block.parigp variable.name.parigp
+##                                                            ^ ^ ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
 ##                                                             ^   ^ source.parigp meta.block.parigp keyword.operator.arithmetic.parigp
 ##                                                                       ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
 ##                                                                        ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp

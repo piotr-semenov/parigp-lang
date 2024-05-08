@@ -39,13 +39,13 @@
 ##  ^ source.parigp constant.character.whitespace.parigp
 ##   ^^^^^^^^^^^^ source.parigp constant.character.escape.parigp
 
-  x = 1;
-  x *= 10;
-##^ source.parigp variable.name.parigp
-## ^  ^ source.parigp constant.character.whitespace.parigp
-##  ^^ source.parigp keyword.operator.arithmetic.assign.parigp
-##     ^^ source.parigp constant.numeric.int.parigp
-##       ^ source.parigp markup.punctuation.statement-terminator.parigp
+  x = 1; x *= 10;
+##^      ^ source.parigp variable.name.parigp
+## ^ ^  ^ ^  ^ source.parigp constant.character.whitespace.parigp
+##  ^ source.parigp keyword.operator.assignment.parigp
+##         ^^ source.parigp keyword.operator.arithmetic.assignment.parigp
+##    ^       ^^ source.parigp constant.numeric.int.parigp
+##     ^        ^ source.parigp markup.punctuation.statement-terminator.parigp
 
   y = x >> 2;
 ##^   ^ source.parigp variable.name.parigp
@@ -64,7 +64,9 @@
 
   [(x) -> x, 1]
 ##^ source.parigp meta.brackets.parigp punctuation.section.brackets.begin.parigp
-## ^^^ source.parigp meta.brackets.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp
+## ^ source.parigp meta.brackets.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##  ^ source.parigp meta.brackets.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp meta.parens.parigp variable.parameter.function.parigp
+##   ^ source.parigp meta.brackets.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp meta.parens.parigp punctuation.section.parens.end.parigp
 ##    ^ source.parigp meta.brackets.parigp meta.function.lambda.anonymous.parigp constant.character.whitespace.parigp
 ##     ^^ source.parigp meta.brackets.parigp meta.function.lambda.anonymous.parigp keyword.operator.lambda
 ##       ^ source.parigp meta.brackets.parigp constant.character.whitespace.parigp
@@ -76,7 +78,9 @@
 
   ({x} -> 1)()
 ##^ source.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
-## ^^^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp
+## ^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp meta.function.parameter.optional.parigp meta.function.parameter.optional.begin.parigp
+##  ^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp meta.function.parameter.optional.parigp variable.parameter.function.parigp
+##   ^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp meta.function.parameter.optional.parigp meta.function.parameter.optional.end.parigp
 ##    ^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp constant.character.whitespace.parigp
 ##     ^^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp keyword.operator.lambda
 ##       ^ source.parigp meta.parens.parigp constant.character.whitespace.parigp
@@ -87,7 +91,7 @@
 
   (x -> 1)(10)
 ##^ source.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
-## ^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp
+## ^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp entity.name.function.user.lambda.anonymous.parigp variable.parameter.function.parigp
 ##  ^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp constant.character.whitespace.parigp
 ##   ^^ source.parigp meta.parens.parigp meta.function.lambda.anonymous.parigp keyword.operator.lambda
 ##     ^ source.parigp meta.parens.parigp constant.character.whitespace.parigp

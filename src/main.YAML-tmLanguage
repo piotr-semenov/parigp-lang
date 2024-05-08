@@ -2,6 +2,7 @@
 ---
 fileTypes:
     - gp
+    - gpi
     - pari
     - parigp
 name: PARI/GP

@@ -30,7 +30,7 @@ repository:
                 name: keyword.operator.increment-decrement.parigp
             -
                 match: '(\+=|\-=|\*=|\/=|\\=|<<=|>>=)'
-                name: keyword.operator.arithmetic.assign.parigp
+                name: keyword.operator.arithmetic.assignment.parigp
             -
                 match: '(\-|\+|\*|\^|\/|\\|\\/|%)'
                 name: keyword.operator.arithmetic.parigp
