@@ -1,0 +1,174 @@
+## SYNTAX TEST "source.parigp" "https://www.jjj.de/pari/gaussnb.gpi"
+
+  /* -*- gp-script -*- */
+##^^ source.parigp comment.block.parigp punctuation.definition.comment.begin.parigp
+##  ^^^^^^^^^^^^^^^^^^^ source.parigp comment.block.parigp
+##                     ^^ source.parigp comment.block.parigp punctuation.definition.comment.end.parigp
+
+  \\% Gaussian normal bases
+##^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##  ^^^^^^^^^^^^^^^^^^^^^^^ source.parigp punctuation.definition.comment.parigp
+  \\ Author: Joerg Arndt
+##^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##  ^^^^^^^^^^^^^^^^^^^^ source.parigp punctuation.definition.comment.parigp
+  \\ License: GPL version 3 or later
+##^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp punctuation.definition.comment.parigp
+  \\ online at http://www.jjj.de/pari/
+##^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp punctuation.definition.comment.parigp
+  \\ version: 2014-October-16 (18:31)
+##^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp punctuation.definition.comment.parigp
+
+  read("vecmanip.gpi"); \\ vecrotl()
+##^^^^ source.parigp entity.name.function.builtins.parigp
+##    ^ source.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##     ^^^^^^^^^^^^^^ source.parigp meta.parens.parigp constant.character.escape.parigp
+##                   ^ source.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                    ^ source.parigp markup.punctuation.statement-terminator.parigp
+##                     ^ source.parigp constant.character.whitespace.parigp
+##                      ^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##                        ^^^^^^^^^^ source.parigp punctuation.definition.comment.parigp
+
+  gauss_test(n, t)=
+##^^^^^^^^^^ source.parigp meta.function.parigp entity.name.function.user.parigp
+##          ^ source.parigp meta.function.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##           ^  ^ source.parigp meta.function.parigp meta.parens.parigp variable.parameter.function.parigp
+##            ^ source.parigp meta.function.parigp meta.parens.parigp markup.punctuation.separator.parigp
+##             ^ source.parigp meta.function.parigp meta.parens.parigp constant.character.whitespace.parigp
+##               ^ source.parigp meta.function.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                ^ source.parigp meta.function.parigp keyword.operator.assignment.parigp
+  { /* Test whether a type-t Gaussian normal basis exists for GF(2^n) */
+##^ source.parigp meta.block.parigp punctuation.section.group.begin.parigp
+## ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^^ source.parigp meta.block.parigp comment.block.parigp punctuation.definition.comment.begin.parigp
+##    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp meta.block.parigp comment.block.parigp
+##                                                                    ^^ source.parigp meta.block.parigp comment.block.parigp punctuation.definition.comment.end.parigp
+    my( p, r2, g, d );
+##^^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^^ source.parigp meta.block.parigp keyword.control.parigp
+##    ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##     ^  ^   ^  ^ ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
+##      ^  ^^  ^  ^ source.parigp meta.block.parigp meta.parens.parigp variable.name.parigp
+##       ^   ^  ^ source.parigp meta.block.parigp meta.parens.parigp markup.punctuation.separator.parigp
+##                  ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                   ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+    p = t*n + 1;
+##^^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^   ^ ^ source.parigp meta.block.parigp variable.name.parigp
+##   ^ ^   ^ ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##    ^ source.parigp meta.block.parigp keyword.operator.assignment.parigp
+##       ^  ^ source.parigp meta.block.parigp keyword.operator.arithmetic.parigp
+##            ^ source.parigp meta.block.parigp constant.numeric.int.parigp
+##             ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+    if ( !isprime(p), return( 0 ) );
+##^^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^^ source.parigp meta.block.parigp entity.name.function.builtins.parigp
+##    ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##     ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##      ^                        ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
+##       ^ source.parigp meta.block.parigp meta.parens.parigp keyword.operator.logical.parigp
+##        ^^^^^^^ source.parigp meta.block.parigp meta.parens.parigp entity.name.function.builtins.parigp
+##               ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##                ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp variable.name.parigp
+##                 ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                  ^ source.parigp meta.block.parigp meta.parens.parigp markup.punctuation.separator.parigp
+##                   ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
+##                    ^^^^^^ source.parigp meta.block.parigp meta.parens.parigp keyword.control.parigp
+##                          ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##                           ^ ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.character.whitespace.parigp
+##                            ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.numeric.int.parigp
+##                              ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                                ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                                 ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+    if ( p<=2, return( 0 ) );
+##^^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^^ source.parigp meta.block.parigp entity.name.function.builtins.parigp
+##    ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##     ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##      ^     ^           ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
+##       ^ source.parigp meta.block.parigp meta.parens.parigp variable.name.parigp
+##        ^^ source.parigp meta.block.parigp meta.parens.parigp keyword.operator.comparison.parigp
+##          ^ source.parigp meta.block.parigp meta.parens.parigp constant.numeric.int.parigp
+##           ^ source.parigp meta.block.parigp meta.parens.parigp markup.punctuation.separator.parigp
+##             ^^^^^^ source.parigp meta.block.parigp meta.parens.parigp keyword.control.parigp
+##                   ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##                    ^ ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.character.whitespace.parigp
+##                     ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.numeric.int.parigp
+##                       ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                         ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                          ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+    r2 = znorder( Mod(2, p) );
+##^^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^^ source.parigp meta.block.parigp variable.name.parigp
+##    ^ ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##     ^ source.parigp meta.block.parigp keyword.operator.assignment.parigp
+##       ^^^^^^^ source.parigp meta.block.parigp entity.name.function.builtins.parigp
+##              ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##               ^         ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
+##                ^^^ source.parigp meta.block.parigp meta.parens.parigp entity.name.function.builtins.parigp
+##                   ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##                    ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.numeric.int.parigp
+##                     ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp markup.punctuation.separator.parigp
+##                      ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.character.whitespace.parigp
+##                       ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp variable.name.parigp
+##                        ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                          ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                           ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+    d = (p-1)/r2;
+##^^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^         ^^ source.parigp meta.block.parigp variable.name.parigp
+##   ^ ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##    ^ source.parigp meta.block.parigp keyword.operator.assignment.parigp
+##      ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##       ^ source.parigp meta.block.parigp meta.parens.parigp variable.name.parigp
+##        ^ source.parigp meta.block.parigp meta.parens.parigp keyword.operator.arithmetic.parigp
+##         ^ source.parigp meta.block.parigp meta.parens.parigp constant.numeric.int.parigp
+##          ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##           ^ source.parigp meta.block.parigp keyword.operator.arithmetic.parigp
+##              ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+  \\    print1(" d=", d, "  ");
+##^^ source.parigp meta.block.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##  ^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp meta.block.parigp punctuation.definition.comment.parigp
+    g = gcd(d, n);
+##^^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^ source.parigp meta.block.parigp variable.name.parigp
+##   ^ ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##    ^ source.parigp meta.block.parigp keyword.operator.assignment.parigp
+##      ^^^ source.parigp meta.block.parigp entity.name.function.builtins.parigp
+##         ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##          ^  ^ source.parigp meta.block.parigp meta.parens.parigp variable.name.parigp
+##           ^ source.parigp meta.block.parigp meta.parens.parigp markup.punctuation.separator.parigp
+##            ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
+##              ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##               ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+  \\    print1( "  t=",t, "  r2=", r2, "  d=", d, "  g=", g);
+##^^ source.parigp meta.block.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.parigp meta.block.parigp punctuation.definition.comment.parigp
+    return ( if ( 1==g, 1, 0) );
+##^^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##  ^^^^^^ source.parigp meta.block.parigp keyword.control.parigp
+##        ^ source.parigp meta.block.parigp constant.character.whitespace.parigp
+##         ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##          ^  ^             ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
+##           ^^ source.parigp meta.block.parigp meta.parens.parigp entity.name.function.builtins.parigp
+##              ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.begin.parigp
+##               ^     ^  ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.character.whitespace.parigp
+##                ^     ^  ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp constant.numeric.int.parigp
+##                 ^^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp keyword.operator.comparison.parigp
+##                   ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp variable.name.parigp
+##                    ^  ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp markup.punctuation.separator.parigp
+##                          ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                            ^ source.parigp meta.block.parigp meta.parens.parigp punctuation.section.parens.end.parigp
+##                             ^ source.parigp meta.block.parigp markup.punctuation.statement-terminator.parigp
+  } /* ----- */
+##^ source.parigp meta.block.parigp punctuation.section.group.end.parigp
+## ^ source.parigp constant.character.whitespace.parigp
+##  ^^ source.parigp comment.block.parigp punctuation.definition.comment.begin.parigp
+##    ^^^^^^^ source.parigp comment.block.parigp
+##           ^^ source.parigp comment.block.parigp punctuation.definition.comment.end.parigp
+
+  \\ ==== end of file ====
+##^^ source.parigp punctuation.definition.comment.parigp comment.line.double-slash.parigp
+##  ^^^^^^^^^^^^^^^^^^^^^^ source.parigp punctuation.definition.comment.parigp

@@ -85,3 +85,19 @@
 ##                    ^^ source.parigp meta.brackets.parigp variable.name.parigp
 ##                      ^ source.parigp meta.brackets.parigp punctuation.section.brackets.end.parigp
 ##                       ^ source.parigp keyword.operator.derivative.parigp
+
+  x = 1; x *= 10;
+##^      ^ source.parigp variable.name.parigp
+## ^ ^  ^ ^  ^ source.parigp constant.character.whitespace.parigp
+##  ^ source.parigp keyword.operator.assignment.parigp
+##         ^^ source.parigp keyword.operator.arithmetic.assignment.parigp
+##    ^       ^^ source.parigp constant.numeric.int.parigp
+##     ^        ^ source.parigp markup.punctuation.statement-terminator.parigp
+
+  y = x >> 2;
+##^   ^ source.parigp variable.name.parigp
+## ^ ^ ^  ^ source.parigp constant.character.whitespace.parigp
+##  ^ source.parigp keyword.operator.assignment.parigp
+##      ^^ source.parigp keyword.operator.shift.parigp
+##         ^ source.parigp constant.numeric.int.parigp
+##          ^ source.parigp markup.punctuation.statement-terminator.parigp

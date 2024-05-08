@@ -11,10 +11,12 @@ repository:
             builtins:
                 patterns:
                     -
-                        match: '\b({{ scopes["entity.name.function"] | join("|") }})\b\s*(?={|\()'
+                        match: '\b({{ scopes["entity.name.function"] | join("|") }})\b(\s*)(?={|\()'
                         captures:
                             1:
                                 name: entity.name.function.builtins.parigp
+                            2:
+                                name: constant.character.whitespace.parigp
                     -
                         match: '\b({{ scopes["constant.language"] | join("|") }})'
                         captures:
@@ -66,12 +68,14 @@ repository:
                             - include: '#general'
                             - include: '#operators'
                     -
-                        begin: '\.([[:alpha:]][[:alnum:]_]*)\b(?=[^=]*=)'
+                        begin: '(\.)([[:alpha:]][[:alnum:]_]*)\b(?=[^=]*=)'
                         end: '(?<=\s*\=)'
                         beginCaptures:
                             1:
+                                name: markup.punctuation.member.parigp
+                            2:
                                 name: entity.name.function.user.member.parigp
-                        name: meta.function.user.member.parigp
+                        name: meta.function.member.parigp
                         patterns:
                             - include: '#general'
                             - include: '#operators'

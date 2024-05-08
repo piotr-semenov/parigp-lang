@@ -51,12 +51,14 @@ $(BUILD_DIR)parigp.tmLanguage: $(BUILD_DIR)parigp.JSON-tmLanguage
 $(J2_RENDERS): $(BUILD_DIR)gp_builtins.json
 	@cat $< | jinja2 --format=yaml $@.j2 > $@
 
+TEST_CASES := $(shell find $(ROOT_DIR)tests/ -name '*.test.gp*')
+
 .PHONY: test
 test:	## Test the Textmate grammar for PARI/GP.
 test: $(BUILD_DIR)parigp.tmLanguage.json
 	@vscode-tmgrammar-test \
 	 --grammar $(BUILD_DIR)parigp.tmLanguage.json \
-	 $(ROOT_DIR)tests/*.gp
+	 $(TEST_CASES)
 
 $(BUILD_DIR)gp_commands.tsv:
 	$(eval FUNCS := $(shell echo '\c' | gp -fq | grep -v 'RETURN'))
@@ -116,7 +118,7 @@ $(ROOT_DIR)images/coverage-badge.svg:
 	 '[.. | select(has("name") and .name != "PARI/GP") | .name] | @tsv' \
 	 $(ROOT_DIR)src/*.YAML-tmLanguage* |\
 	 xargs -n1 | sort | uniq))
-	$(eval SCOPES_UNDER_TEST := $(shell tail -n+2 $(ROOT_DIR)tests/*.test.gp |\
+	$(eval SCOPES_UNDER_TEST := $(shell tail -n+2 $(TEST_CASES) |\
 	 grep -o 'source.parigp.*$$' |\
 	 xargs -n1 | sort | uniq | grep -v source.parigp))
 	$(eval DIFF := $(shell echo $(REFS) $(SCOPES_UNDER_TEST) | tr ' ' '\n' | sort | uniq -u | xargs -n1))
