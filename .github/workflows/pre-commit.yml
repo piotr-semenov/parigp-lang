@@ -10,8 +10,10 @@ jobs:
   Run-Hooks:
     runs-on: macos-12
     steps:
-      - name: Install pre-commit, jsonlint, and yamllint
-        run: brew install pre-commit jsonlint yamllint
+      - name: Install preliminaries
+        run: |
+          brew install pre-commit jsonlint yamllint
+          vagrant plugin install vagrant-disksize
 
       - name: Checkout
         uses: actions/checkout@v4
