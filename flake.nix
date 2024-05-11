@@ -10,7 +10,7 @@
       {
         packages.${current_system}.default =
 
-        with import nixpkgs { system = current_system; };
+        with import ./nixpkgs.nix { system = current_system; };
         let vscode_tmgrammar_test =
           buildNpmPackage rec {
             pname = "vscode-tmgrammar-test";
