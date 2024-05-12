@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Install preliminaries
         run: |
-          brew install pre-commit jsonlint yamllint
+          brew install pre-commit jsonlint yamllint shellcheck
           vagrant plugin install vagrant-disksize
 
       - name: Checkout

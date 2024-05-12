@@ -6,12 +6,12 @@
 set -e
 
 
-scriptPath="$(readlink -f $0)"
+scriptPath=$(readlink -f "$0")
 rootDir=$(dirname "${scriptPath%/*}")
 
 statix check
 nix flake check --impure "$rootDir"
 
-cp $(nix build --impure \
-               --no-link \
-               --print-out-paths "$rootDir")/parigp* "$rootDir/syntaxes/"
+cp "$(nix build --impure \
+                --no-link \
+                --print-out-paths "$rootDir")"/parigp* "$rootDir/syntaxes/"
