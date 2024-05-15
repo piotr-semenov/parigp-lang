@@ -101,3 +101,12 @@
 ##      ^^ source.parigp keyword.operator.shift.parigp
 ##         ^ source.parigp constant.numeric.int.parigp
 ##          ^ source.parigp markup.punctuation.statement-terminator.parigp
+
+  # [1, 2, 3]
+##^ source.parigp keyword.operator.cardinality.parigp
+## ^ source.parigp constant.character.whitespace.parigp
+##  ^ source.parigp meta.brackets.parigp punctuation.section.brackets.begin.parigp
+##   ^  ^  ^ source.parigp meta.brackets.parigp constant.numeric.int.parigp
+##    ^  ^ source.parigp meta.brackets.parigp markup.punctuation.separator.parigp
+##     ^  ^ source.parigp meta.brackets.parigp constant.character.whitespace.parigp
+##          ^ source.parigp meta.brackets.parigp punctuation.section.brackets.end.parigp

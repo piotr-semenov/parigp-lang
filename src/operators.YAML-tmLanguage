@@ -44,5 +44,9 @@ repository:
                 match: "(\\')(?!\\b)"
                 name: keyword.operator.derivative.parigp
             -
-                match: '(\#)\b\s*(?!$)'
-                name: keyword.operator.cardinality.parigp
+                match: '(\#)(\s*)(?!$)'
+                captures:
+                    1:
+                        name: keyword.operator.cardinality.parigp
+                    2:
+                        name: constant.character.whitespace.parigp
