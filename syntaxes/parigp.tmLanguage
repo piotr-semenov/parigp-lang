@@ -643,11 +643,16 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
+							<string>constant.character.whitespace.parigp</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
 							<string>support.function.parigp</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>^\s*(##(?!\b)|#(?!\b)|\\B |\\ |\\a |\\c |\\d |\\e |\\g |\\gf|\\gm|\\h |\\l |\\m |\\o |\\p |\\pb|\\ps|\\q |\\r |\\s |\\t |\\u |\\um |\\v |\\w |\\x |\\y )</string>
+					<string>^(\s*)(##(?=\s*$)|#(?=\s*$)|\\B |\\ |\\a |\\c |\\d |\\e |\\g |\\gf|\\gm|\\h |\\l |\\m |\\o |\\p |\\pb|\\ps|\\q |\\r |\\s |\\t |\\u |\\um |\\v |\\w |\\x |\\y )</string>
 				</dict>
 			</array>
 		</dict>
@@ -805,11 +810,16 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
+							<string>keyword.operator.cardinality.parigp</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
 							<string>support.type.parigp</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\s*\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b</string>
+					<string>(\s*)\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b</string>
 				</dict>
 			</array>
 		</dict>

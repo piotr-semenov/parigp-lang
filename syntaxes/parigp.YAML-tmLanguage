@@ -239,15 +239,19 @@ repository:
             name: constant.character.whitespace.parigp
   meta-commands:
     patterns:
-      - match: '^\s*(##(?!\b)|#(?!\b)|\\B |\\ |\\a |\\c |\\d |\\e |\\g |\\gf|\\gm|\\h |\\l |\\m |\\o |\\p |\\pb|\\ps|\\q |\\r |\\s |\\t |\\u |\\um |\\v |\\w |\\x |\\y )'
+      - match: '^(\s*)(##(?=\s*$)|#(?=\s*$)|\\B |\\ |\\a |\\c |\\d |\\e |\\g |\\gf|\\gm|\\h |\\l |\\m |\\o |\\p |\\pb|\\ps|\\q |\\r |\\s |\\t |\\u |\\um |\\v |\\w |\\x |\\y )'
         captures:
           1:
+            name: constant.character.whitespace.parigp
+          2:
             name: support.function.parigp
   type-hints:
     patterns:
-      - match: '\s*\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b'
+      - match: '(\s*)\b(t_CLOSURE|t_COL|t_COMPLEX|t_ERROR|t_FFELT|t_FRAC|t_INFINITY|t_INT|t_INTMOD|t_LIST|t_MAT|t_PADIC|t_POL|t_POLMOD|t_QFB|t_QUAD|t_REAL|t_RFRAC|t_SER|t_STR|t_VEC|t_VECSMALL)\b'
         captures:
           1:
+            name: keyword.operator.cardinality.parigp
+          2:
             name: support.type.parigp
 # yamllint disable rule:hyphens
 fileTypes:
