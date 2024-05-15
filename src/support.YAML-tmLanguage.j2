@@ -4,7 +4,9 @@ repository:
     meta-commands:
         patterns:
             -
-                match: '^\s*(##(?!\b)|#(?!\b)|\{{ scopes["support.function"] | join("|\\") }})'
+                match: '^(\s*)(##(?=\s*$)|#(?=\s*$)|\{{ scopes["support.function"] | join("|\\") }})'
                 captures:
                     1:
+                        name: constant.character.whitespace.parigp
+                    2:
                         name: support.function.parigp

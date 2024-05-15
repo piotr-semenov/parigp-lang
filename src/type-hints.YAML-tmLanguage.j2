@@ -3,7 +3,9 @@ repository:
     type-hints:
         patterns:
             -
-                match: '\s*\b({{ scopes["support.type"] | join("|") }})\b'
+                match: '(\s*)\b({{ scopes["support.type"] | join("|") }})\b'
                 captures:
                     1:
+                        name: keyword.operator.cardinality.parigp
+                    2:
                         name: support.type.parigp

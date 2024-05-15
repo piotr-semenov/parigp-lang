@@ -125,8 +125,9 @@
 ##                                       ^^ source.parigp meta.parens.parigp constant.numeric.int.parigp
 ##                                         ^ source.parigp meta.parens.parigp punctuation.section.parens.end.parigp
 
-  \q
-##^^ source.parigp support.function.parigp
+    \q
+##^^ source.parigp constant.character.whitespace.parigp
+##  ^^ source.parigp support.function.parigp
 
   \w "output.txt"
 ##^^ source.parigp support.function.parigp

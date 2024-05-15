@@ -239,7 +239,6 @@
 ##     ^ source.parigp meta.block.parigp meta.parens.parigp meta.parens.parigp punctuation.section.parens.end.parigp
   ,
 ##^ source.parigp meta.block.parigp meta.parens.parigp markup.punctuation.separator.parigp
-## ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
     M = G[1];
 ##^^ ^ ^ source.parigp meta.block.parigp meta.parens.parigp constant.character.whitespace.parigp
 ##  ^   ^ source.parigp meta.block.parigp meta.parens.parigp variable.name.parigp
