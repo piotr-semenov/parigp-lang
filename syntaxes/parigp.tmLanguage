@@ -740,10 +740,21 @@
 					<string>keyword.operator.derivative.parigp</string>
 				</dict>
 				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.cardinality.parigp</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>constant.character.whitespace.parigp</string>
+						</dict>
+					</dict>
 					<key>match</key>
-					<string>(\#)\b\s*(?!$)</string>
-					<key>name</key>
-					<string>keyword.operator.cardinality.parigp</string>
+					<string>(\#)(\s*)(?!$)</string>
 				</dict>
 			</array>
 		</dict>

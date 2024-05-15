@@ -231,8 +231,12 @@ repository:
         name: keyword.operator.transpose.parigp
       - match: "(\\')(?!\\b)"
         name: keyword.operator.derivative.parigp
-      - match: '(\#)\b\s*(?!$)'
-        name: keyword.operator.cardinality.parigp
+      - match: '(\#)(\s*)(?!$)'
+        captures:
+          1:
+            name: keyword.operator.cardinality.parigp
+          2:
+            name: constant.character.whitespace.parigp
   meta-commands:
     patterns:
       - match: '^\s*(##(?!\b)|#(?!\b)|\\B |\\ |\\a |\\c |\\d |\\e |\\g |\\gf|\\gm|\\h |\\l |\\m |\\o |\\p |\\pb|\\ps|\\q |\\r |\\s |\\t |\\u |\\um |\\v |\\w |\\x |\\y )'
