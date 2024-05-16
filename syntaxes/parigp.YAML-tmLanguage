@@ -261,7 +261,6 @@ fileTypes:
   - parigp
 name: PARI/GP
 patterns:
-  - include: '#comments'
   - include: '#code'
 scopeName: source.parigp
 $schema: >-
