@@ -1,0 +1,9 @@
+---
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 Github Discussions
+    url: https://github.com/piotr-semenov/parigp-lang/discussions
+    about: Please start any discussions here.
+  - name: 💬 Gitter Chat
+    url: https://matrix.to/#/#parigp-lang:gitter.im
+    about: Feel free to chat with me here.
