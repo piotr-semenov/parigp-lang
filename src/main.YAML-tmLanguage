@@ -7,7 +7,6 @@ fileTypes:
     - parigp
 name: PARI/GP
 patterns:
-    - include: '#comments'
     - include: '#code'
 repository:
     parens:
