@@ -1,0 +1,27 @@
+# yamllint disable rule:line-length
+---
+name: 🐞 Bug Report
+description: File a bug/issue.
+title: '[Bug]: '
+assignees: ['piotr-semenov']
+labels: ['bug']
+body:
+  - type: textarea
+    attributes:
+      label: PARI/GP syntax failure
+      description: Example of wrong syntax markup of your PARI/GP code.
+      placeholder: |+
+        Wrong markup for code below.
+        ```text
+        Your PARI/GP code here
+        ```
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Any other problem (installation issues, build failures, etc.)
+      description: |
+        Anything about the issue you are encountering: description, screenshots, etc.
+      placeholder: Your description here...
+    validations:
+      required: false

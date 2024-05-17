@@ -1,0 +1,24 @@
+# yamllint disable rule:line-length
+---
+name: 💡 Feature Request
+description: Suggest an idea to enhance this project.
+title: '[Feature]: '
+assignees: ['piotr-semenov']
+labels: ['enhancement']
+body:
+  - type: textarea
+    id: feature-proposal
+    attributes:
+      label: What would you like to add to this project?
+      description: Description of the feature or enhancement wanted.
+      placeholder: Your feature proposal here...
+    validations:
+      required: true
+  - type: textarea
+    id: feature-reason
+    attributes:
+      label: Why is this needed?
+      description: Please, provide the use case example why you need this feature.
+      placeholder: Your use case example here...
+    validations:
+      required: true

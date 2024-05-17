@@ -37,7 +37,7 @@ repos:
         name: lints yaml
         entry: yamllint
         language: system
-        files: '.*\.(yaml|YAML-tmLanguage)'
+        files: '.*\.(yaml|yml|YAML-tmLanguage)'
   # xml
   - repo: local
     hooks:
