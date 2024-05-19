@@ -115,9 +115,9 @@ $(BUILD_DIR)parigp.sublime-tooltip: $(BUILD_DIR)gp_commands.tsv
 
 $(ROOT_DIR)images/coverage-badge.svg:
 	$(eval REFS := $(shell yq \
-	 '[.. | select(has("name") and .name != "PARI/GP") | .name] | @tsv' \
+	 '[.. | select((has("name") or has("contentName")) and .name != "PARI/GP") | "\(.name) \(.contentName)"] | @tsv' \
 	 $(ROOT_DIR)src/*.YAML-tmLanguage* |\
-	 xargs -n1 | sort | uniq))
+	 xargs -n1 | grep -v null | sort | uniq))
 	$(eval SCOPES_UNDER_TEST := $(shell tail -n+2 $(TEST_CASES) |\
 	 grep -o 'source.parigp.*$$' |\
 	 xargs -n1 | sort | uniq | grep -v source.parigp))
