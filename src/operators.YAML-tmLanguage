@@ -20,9 +20,6 @@ repository:
                 match: '(<=|>=|<|(?<!\-)>|!=|==)'
                 name: keyword.operator.comparison.parigp
             -
-                match: '(\->)'
-                name: keyword.operator.lambda
-            -
                 match: '(=)'
                 name: keyword.operator.assignment.parigp
             -

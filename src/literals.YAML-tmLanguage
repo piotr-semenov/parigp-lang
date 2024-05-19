@@ -3,27 +3,26 @@
 repository:
     literals:
         patterns:
-            - include: '#numeric'
-            - include: '#string'
+            - include: '#_numeric'
+            - include: '#_string'
 
-        repository:
-            numeric:
-                patterns:
-                    -
-                        match: '\b(0(x|X)[0-9A-Fa-f]*)\b'
-                        name: constant.numeric.hex.parigp
-                    -
-                        match: '\b(0(b|B)[0-1]*)\b'
-                        name: constant.numeric.bin.parigp
-                    -
-                        match: '(([0-9]+\.?[0-9]*|[0-9]*\.?[0-9]+)\s*([eE][+-]?[0-9]+)\b|[0-9]+\.(?!\.)[0-9]*|(?<!\.)\.[0-9]+\b)'
-                        name: constant.numeric.float.parigp
-                    -
-                        match: '\b([0-9]+)\b'
-                        name: constant.numeric.int.parigp
+    _numeric:
+        patterns:
+            -
+                match: '\b(0(x|X)[0-9A-Fa-f]*)\b'
+                name: constant.numeric.hex.parigp
+            -
+                match: '\b(0(b|B)[0-1]*)\b'
+                name: constant.numeric.bin.parigp
+            -
+                match: '(([0-9]+\.?[0-9]*|[0-9]*\.?[0-9]+)\s*([eE][+-]?[0-9]+)\b|[0-9]+\.(?!\.)[0-9]*|(?<!\.)\.[0-9]+\b)'
+                name: constant.numeric.float.parigp
+            -
+                match: '\b([0-9]+)\b'
+                name: constant.numeric.int.parigp
 
-            string:
-                patterns:
-                    -
-                        match: '"(.*)"'
-                        name: constant.character.escape.parigp
+    _string:
+        patterns:
+            -
+                match: '"(.*)"'
+                name: constant.character.escape.parigp

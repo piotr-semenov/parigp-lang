@@ -4,104 +4,112 @@ repository:
     parens: &parens_rules []
     functions:
         patterns:
-            - include: '#builtins'
-            - include: '#user-defined'
+            - include: '#_builtins'
+            - include: '#_user-defined'
 
-        repository:
-            builtins:
-                patterns:
-                    -
-                        match: '\b({{ scopes["entity.name.function"] | join("|") }})\b(\s*)(?={|\()'
-                        captures:
-                            1:
-                                name: entity.name.function.builtins.parigp
-                            2:
-                                name: constant.character.whitespace.parigp
-                    -
-                        match: '\b({{ scopes["constant.language"] | join("|") }})'
-                        captures:
-                            1:
-                                name: constant.language.parigp
-                    -
-                        match: '\b({{ scopes["keyword.control"] | join("|") }})\b'
-                        captures:
-                            1:
-                                name: keyword.control.parigp
-                    -
-                        match: '(\.)({{ scopes["entity.name.function.member"] | join("|") }})\b'
-                        captures:
-                            1:
-                                name: markup.punctuation.member.parigp
-                            2:
-                                name: entity.name.function.member.builtins.parigp
+    _builtins:
+        patterns:
+            -
+                match: '\b({{ scopes["entity.name.function"] | join("|") }})\b(\s*)(?={|\()'
+                captures:
+                    1:
+                        name: entity.name.function.builtins.parigp
+                    2:
+                        name: constant.character.whitespace.parigp
+            -
+                match: '\b({{ scopes["constant.language"] | join("|") }})'
+                captures:
+                    1:
+                        name: constant.language.parigp
+            -
+                match: '\b({{ scopes["keyword.control"] | join("|") }})\b'
+                captures:
+                    1:
+                        name: keyword.control.parigp
+            -
+                match: '(\.)({{ scopes["entity.name.function.member"] | join("|") }})\b'
+                captures:
+                    1:
+                        name: markup.punctuation.member.parigp
+                    2:
+                        name: entity.name.function.member.builtins.parigp
 
-            user-defined:
+    _user-defined:
+        patterns:
+            -
+                begin: '([[:alpha:]][[:alnum:]_]*)\b(?=(\s*\(|\(\s*\{|\{\s*\()[^=]*=)'
+                end: '(?<=\=)'
+                beginCaptures:
+                    1:
+                        name: entity.name.function.user.parigp
+                name: meta.function.parigp
                 patterns:
-                    -
-                        begin: '([[:alpha:]][[:alnum:]_]*)\b(?=(\s*\(|\(\s*\{|\{\s*\()[^=]*=)'
-                        end: '(?<=\s*\=)'
-                        beginCaptures:
-                            1:
-                                name: entity.name.function.user.parigp
-                        name: meta.function.parigp
-                        patterns:
-                            - include: '#function-vars'
-                    -
-                        begin: '([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*(\(([^()]|(\g<2>))*\)|[[:alpha:]][[:alnum:]_]*)\s*\-\s*>)'
-                        end: '(?<=\s*\-\s*>)'
-                        beginCaptures:
-                            1:
-                                name: entity.name.function.user.lambda.parigp
-                        name: meta.function.lambda.parigp
-                        patterns:
-                            - include: '#function-vars'
-                    -
-                        begin: '(\(([^()]|(\g<0>))*\)|[[:alpha:]][[:alnum:]_]*|\{.+\})(?=\s*\-\s*>)'
-                        end: '(?<=\s*\-\s*>)'
-                        beginCaptures:
-                            1:
-                                name: entity.name.function.user.lambda.anonymous.parigp
-                                patterns:
-                                    - include: '#function-vars'
-                        name: meta.function.lambda.anonymous.parigp
-                        patterns:
-                            - include: '#general'
-                            - include: '#operators'
-                    -
-                        begin: '(\.)([[:alpha:]][[:alnum:]_]*)\b(?=[^=]*=)'
-                        end: '(?<=\s*\=)'
-                        beginCaptures:
-                            1:
-                                name: markup.punctuation.member.parigp
-                            2:
-                                name: entity.name.function.user.member.parigp
-                        name: meta.function.member.parigp
-                        patterns:
-                            - include: '#general'
-                            - include: '#operators'
-                repository:
-                    function-vars:
-                        patterns:
-                            -
-                                <<: *parens_rules
-                                patterns:
-                                    - include: '#function-vars'
-                            - include: '#general'
-                            - include: '#literals'
-                            - include: '#operators'
-                            - include: '#type-hints'
-                            -
-                                match: '(?<!:\s*)([[:alpha:]][[:alnum:]_]*)\s*'
-                                name: variable.parameter.function.parigp
-                            -
-                                begin: '(\{)'
-                                end: '(\})'
-                                beginCaptures:
-                                    1:
-                                        name: meta.function.parameter.optional.begin.parigp
-                                endCaptures:
-                                    1:
-                                        name: meta.function.parameter.optional.end.parigp
-                                name: meta.function.parameter.optional.parigp
-                                patterns:
-                                    - include: '#function-vars'
+                    - include: '#_function-vars'
+            -
+                begin: '([[:alpha:]][[:alnum:]_]*)\b(?=\s*=\s*(\(([^()]|(\g<2>))*\)|[[:alpha:]][[:alnum:]_]*)\s*\-\s*>)'
+                end: '\-(\s*)>'
+                beginCaptures:
+                    1:
+                        name: entity.name.function.user.lambda.parigp
+                endCaptures:
+                    0:
+                        name: keyword.operator.lambda
+                    1:
+                        name: constant.character.whitespace.parigp
+                name: meta.function.lambda.parigp
+                patterns:
+                    - include: '#_function-vars'
+            -
+                begin: '(?=(?:\(([^()]|(\g<0>))*\)|[[:alpha:]][[:alnum:]_]*|\{.+\})\s*\-\s*>)'
+                end: '\-(\s*)>'
+                contentName: entity.name.function.user.lambda.anonymous.parigp
+                endCaptures:
+                    0:
+                        name: keyword.operator.lambda
+                    1:
+                        name: constant.character.whitespace.parigp
+                name: meta.function.lambda.anonymous.parigp
+                patterns:
+                    - include: '#_function-vars'
+            -
+                begin: '(\.)([[:alpha:]][[:alnum:]_]*)\b(?=[^=]*=)'
+                end: '(?<=\=)'
+                beginCaptures:
+                    1:
+                        name: markup.punctuation.member.parigp
+                    2:
+                        name: entity.name.function.user.member.parigp
+                name: meta.function.member.parigp
+                patterns:
+                    - include: '#general'
+                    - include: '#operators'
+
+    _function-vars:
+        patterns:
+            -
+                <<: *parens_rules
+                patterns:
+                    - include: '#_function-vars'
+            - include: '#general'
+            - include: '#literals'
+            - include: '#operators'
+            - include: '#type-hints'
+            -
+                match: '(?<!:)(\s*)([[:alpha:]][[:alnum:]_]*)'
+                captures:
+                    1:
+                        name: constant.character.whitespace.parigp
+                    2:
+                        name: variable.parameter.function.parigp
+            -
+                begin: '(\{)'
+                end: '(\})'
+                beginCaptures:
+                    1:
+                        name: meta.function.parameter.optional.begin.parigp
+                endCaptures:
+                    1:
+                        name: meta.function.parameter.optional.end.parigp
+                name: meta.function.parameter.optional.parigp
+                patterns:
+                    - include: '#_function-vars'

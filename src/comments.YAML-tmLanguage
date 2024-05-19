@@ -2,7 +2,7 @@
 repository:
     comments:
         patterns:
-            - include: '#inline'
+            - include: '#_inline'
             -
                 begin: '/\*'
                 beginCaptures:
@@ -15,13 +15,12 @@ repository:
                 name: comment.block.parigp
                 patterns:
                     - include: '#comments'
-        repository:
-            inline:
-                patterns:
-                    -
-                        match: '(\\\\).*$\n?'
-                        captures:
-                            0:
-                                name: punctuation.definition.comment.parigp
-                            1:
-                                name: comment.line.double-slash.parigp
+    _inline:
+        patterns:
+            -
+                match: '(\\\\).*$\n?'
+                captures:
+                    0:
+                        name: punctuation.definition.comment.parigp
+                    1:
+                        name: comment.line.double-slash.parigp
