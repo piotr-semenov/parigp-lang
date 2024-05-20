@@ -15,3 +15,4 @@ nix flake check --impure "$rootDir"
 cp "$(nix build --impure \
                 --no-link \
                 --print-out-paths "$rootDir")"/parigp* "$rootDir/syntaxes/"
+nix develop --check --impure "$rootDir"
