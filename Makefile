@@ -81,17 +81,17 @@ define get_gp_list
 	 <(echo '$(2)' | gp -fq | grep : | cut -d':' -f1 | $(3) tr ',' '\n') |\
 	 sort |\
 	 uniq |\
-	 xargs -I@ $(SHELL) -c 'echo -e \@"\n"' | xargs -n1 $(4) >> $@
+	 xargs -I@ $(SHELL) -c 'echo -e \@"\n"' | xargs $(4) >> $@
 endef
 
 $(BUILD_DIR)gp_member_functions.tsv:
-	$(call get_gp_list,'Member','?.',,)
+	$(call get_gp_list,'Member','?.',,-n1)
 
 $(BUILD_DIR)gp_types.tsv:
-	$(call get_gp_list,'Type','\\t',tail -n+2 |,)
+	$(call get_gp_list,'Type','\\t',tail -n+2 |,-n1)
 
 $(BUILD_DIR)gp_support_commands.tsv:
-	$(call get_gp_list,'MetaCommand','?\\',tail -n+3 | cut -d'{' -f1 |,-I@ echo '\@')
+	$(call get_gp_list,'MetaCommand','?\\',tail -n+4 | cut -d'{' -f1 | cut -d' ' -f1 |,-I@ echo '\@')
 
 GP_ITEMS := commands member_functions types support_commands
 $(BUILD_DIR)gp_builtins.json: $(foreach item,$(GP_ITEMS),$(BUILD_DIR)gp_$(item).tsv)
