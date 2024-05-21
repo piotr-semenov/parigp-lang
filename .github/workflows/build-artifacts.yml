@@ -1,13 +1,14 @@
+# yamllint disable rule:line-length
 ---
 name: Build Artifacts
 
 on:
   push:
-    branches: [ main ]
-    paths-ignore: [ "*.md" ]
+    branches: [main]
+    paths-ignore: ["*.md"]
   pull_request:
-    branches: [ main ]
-    paths-ignore: [ "*.md" ]
+    branches: [main]
+    paths-ignore: ["*.md"]
 
 jobs:
   Compile-All:
@@ -23,8 +24,12 @@ jobs:
 
       - name: Compile TextMate Grammar
         run: |
+          set +e
           chmod +x ./scripts/compile-grammar.sh
           ./scripts/compile-grammar.sh
+          exitcode="$?"
+          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+          exit "$exitcode"
         shell: bash
 
       - name: Compile Coverage Badge SVG
