@@ -242,7 +242,7 @@ repository:
             name: constant.character.whitespace.parigp
   meta-commands:
     patterns:
-      - match: '^(\s*)(##(?=\s*$)|#(?=\s*$)|\\B |\\ |\\a |\\c |\\d |\\e |\\g |\\gf|\\gm|\\h |\\l |\\m |\\o |\\p |\\pb|\\ps|\\q |\\r |\\s |\\t |\\u |\\um |\\v |\\w |\\x |\\y )'
+      - match: '^(\s*)(##(?=\s*$)|#(?=\s*$)|\\B|\\a|\\c|\\d|\\e|\\g|\\gf|\\gm|\\h|\\l|\\m|\\o|\\p|\\pb|\\ps|\\q|\\r|\\s|\\t|\\u|\\um|\\v|\\w|\\x|\\y)'
         captures:
           1:
             name: constant.character.whitespace.parigp

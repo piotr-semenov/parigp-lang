@@ -656,7 +656,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>^(\s*)(##(?=\s*$)|#(?=\s*$)|\\B |\\ |\\a |\\c |\\d |\\e |\\g |\\gf|\\gm|\\h |\\l |\\m |\\o |\\p |\\pb|\\ps|\\q |\\r |\\s |\\t |\\u |\\um |\\v |\\w |\\x |\\y )</string>
+					<string>^(\s*)(##(?=\s*$)|#(?=\s*$)|\\B|\\a|\\c|\\d|\\e|\\g|\\gf|\\gm|\\h|\\l|\\m|\\o|\\p|\\pb|\\ps|\\q|\\r|\\s|\\t|\\u|\\um|\\v|\\w|\\x|\\y)</string>
 				</dict>
 			</array>
 		</dict>
