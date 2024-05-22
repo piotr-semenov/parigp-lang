@@ -60,7 +60,7 @@ test: $(BUILD_DIR)parigp.tmLanguage.json
 	 --grammar $(BUILD_DIR)parigp.tmLanguage.json \
 	 $(TEST_CASES)
 
-$(BUILD_DIR)gp_commands.tsv:
+$(BUILD_DIR)gp_commands.tsv: $(BUILD_DIR)
 	$(eval FUNCS := $(shell echo '\c' | gp -fq | grep -v 'RETURN'))
 	@printf 'Command\tType\n' > $@
 	@echo $(FUNCS) |\
@@ -84,13 +84,13 @@ define get_gp_list
 	 xargs -I@ $(SHELL) -c 'echo -e \@"\n"' | xargs $(4) >> $@
 endef
 
-$(BUILD_DIR)gp_member_functions.tsv:
+$(BUILD_DIR)gp_member_functions.tsv: $(BUILD_DIR)
 	$(call get_gp_list,'Member','?.',,-n1)
 
-$(BUILD_DIR)gp_types.tsv:
+$(BUILD_DIR)gp_types.tsv: $(BUILD_DIR)
 	$(call get_gp_list,'Type','\\t',tail -n+2 |,-n1)
 
-$(BUILD_DIR)gp_support_commands.tsv:
+$(BUILD_DIR)gp_support_commands.tsv: $(BUILD_DIR)
 	$(call get_gp_list,'MetaCommand','?\\',tail -n+4 | cut -d'{' -f1 | cut -d' ' -f1 |,-I@ echo '\@')
 
 GP_ITEMS := commands member_functions types support_commands

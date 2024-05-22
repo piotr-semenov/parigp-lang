@@ -39,6 +39,7 @@
                 yq-go
                 gnumake
                 gnused
+
                 python39
                 jinja2-cli
 
@@ -47,6 +48,7 @@
                 vscode_tmgrammar_test
               ];
               src = self;
+              configurePhase = "make clean";
               buildPhase = "make build";
               checkPhase = "make test";
               installPhase = "mkdir -p $out; cp syntaxes/* $out/";
