@@ -23,19 +23,27 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Compile TextMate Grammar
+        id: compile-tmGrammar
         run: |
-          set +e
           chmod +x ./scripts/compile-grammar.sh
           ./scripts/compile-grammar.sh
-          exitcode="$?"
-          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
-          exit "$exitcode"
+        shell: bash
+
+      - if: steps.compile-tmGrammar.outcome != 'success'
+        run: |
+          exit 1
         shell: bash
 
       - name: Compile Coverage Badge SVG
+        id: compile-svg
         run: |
           sudo apt-get install -y xsltproc
           make -B $(pwd)/images/coverage-badge.svg
+        shell: bash
+
+      - if: steps.compile-svg.outcome != 'success'
+        run: |
+          exit 1
         shell: bash
 
       - name: Import GPG key
